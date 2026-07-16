@@ -13,136 +13,124 @@ const DEFAULT_SITES = [
         monthlyVisitors: 4500
     },
     {
-        id: "snap-calorie-ai",
-        name: "스냅칼로리 AI (SnapCalorie AI)",
-        url: "../../OneDrive/바탕 화면/스냅칼로리AI/index.html",
+        id: "echo-shadowing",
+        name: "Echo Shadowing (실시간 AI 다국어 섀도잉 발음 튜터)",
+        url: "https://echoshadow.life/",
         category: "ai",
         status: "active",
-        desc: "카메라로 음식 사진을 촬영하여 칼로리 및 영양 성분을 즉시 자동 분석해주는 Vision AI 기반 스마트 헬스케어 서비스입니다.",
-        tags: ["Vision AI", "Diet Tracker", "Webcam", "Canvas"],
-        dateAdded: "2026-07-09T03:00:00Z",
-        monthlyRevenue: 150000,
-        monthlyVisitors: 2200
-    },
-    {
-        id: "ai-hand-alkkagi",
-        name: "AI 손가락 알까기 게임",
-        url: "../../OneDrive/바탕 화면/게임프로젝트-Skills/ai-hand-alkkagi/index.html",
-        category: "game",
-        status: "active",
-        desc: "카메라 핸드 트래킹을 이용한 AI 손가락 알까기 물리 게임. 화면 앞에서 손가락 튕기기 동작으로 돌을 날려 상대편 알을 떨어트리는 중독성 강한 캐주얼 보드 게임입니다.",
-        tags: ["MediaPipe Hands", "Physics Engine", "HTML5 Canvas"],
-        dateAdded: "2026-07-11T07:04:00Z",
+        desc: "사용자의 발음을 실시간으로 듣고 원어민 발음과의 유사도를 분석하여 정밀한 피드백을 제공하는 AI 외국어 학습 섀도잉 튜터 서비스입니다.",
+        tags: ["AI", "Speech Recognition", "Shadowing", "English Study"],
+        dateAdded: "2026-07-16T08:05:00Z",
         monthlyRevenue: 0,
-        monthlyVisitors: 850
+        monthlyVisitors: 0
     },
     {
-        id: "link-bio-profit",
-        name: "Link-Bio Profit (수익화 에이전트)",
-        url: "../../OneDrive/바탕 화면/수익화에이전트_Paypal/link-bio-profit/index.html",
+        id: "v-taxflow",
+        name: "Vanguard Tax Flow (뱅가드 텍스 플로우)",
+        url: "https://v-taxflow.cloud",
         category: "business",
         status: "active",
-        desc: "인플루언서 및 크리에이터를 위한 링크인바이오 페이지 제작 솔루션. 페이팔 다이렉트 결제 모듈이 연동되어 있어 디지털 콘텐츠 판매 및 후원 기능을 즉시 활용할 수 있습니다.",
-        tags: ["PayPal API", "Link-in-Bio", "Monetization"],
-        dateAdded: "2026-07-08T09:00:00Z",
-        monthlyRevenue: 450000,
-        monthlyVisitors: 3100
+        desc: "미국 독립 계약자, 1인 사업자 및 프리랜서를 위한 AI 세금 및 현금 흐름 최적화 솔루션. Plaid 연동으로 세금 공제 비용을 찾고 Form 1040-ES 납부서를 내보냅니다.",
+        tags: ["AI Tax", "Freelancer", "Finance"],
+        dateAdded: "2026-07-16T08:08:00Z",
+        monthlyRevenue: 0,
+        monthlyVisitors: 0
     },
     {
-        id: "your-caricature",
-        name: "Your 캐리커쳐 아바타 메이커",
-        url: "../../OneDrive/바탕 화면/your 케리터쳐/index.html",
+        id: "magic-kids-ar",
+        name: "MagicKids AR (매직키즈 AR)",
+        url: "https://magickidsar.com",
+        category: "game",
+        status: "active",
+        desc: "AI와 증강현실(AR) 기술을 결합하여 구연동화, 낱말 놀이, 동물 변신 등을 즐기는 인터랙티브 유아 교육 플랫폼입니다. 신체 움직임으로 상호작용합니다.",
+        tags: ["AR", "MediaPipe", "Education", "Kids"],
+        dateAdded: "2026-07-16T08:09:00Z",
+        monthlyRevenue: 0,
+        monthlyVisitors: 0
+    },
+    {
+        id: "petpic-ai",
+        name: "PetPic AI (펫픽 AI)",
+        url: "https://petpicai.art",
         category: "ai",
         status: "active",
-        desc: "카메라로 찍은 인물 사진을 스타일 전송 기술로 개성 넘치는 만화풍 캐리커쳐 아바타 이미지로 변환해주는 AI 아트 스케치 웹앱입니다.",
-        tags: ["Style Transfer", "HTML5 Canvas", "Blob API"],
-        dateAdded: "2026-07-10T12:00:00Z",
+        desc: "반려동물 사진을 업로드하여 다양한 테마 스타일의 예쁜 고해상도 AI 프로필 이미지로 변환해 주는 반려동물 특화 AI 이미지 생성 서비스입니다.",
+        tags: ["AI Profile", "Pet Art", "Image Gen"],
+        dateAdded: "2026-07-16T08:10:00Z",
         monthlyRevenue: 0,
-        monthlyVisitors: 620
+        monthlyVisitors: 0
     },
     {
-        id: "drone-racing-game",
-        name: "3D 드론 레이싱 게임",
-        url: "../../Downloads/드론게임/index.html",
-        category: "game",
-        status: "active",
-        desc: "3D 공간 속 장애물들을 피해 비행하는 드론 조종 시뮬레이터. 웹 브라우저에서 조종 감각을 테스트할 수 있도록 부드러운 물리 가속을 구현했습니다.",
-        tags: ["WebGL", "Three.js", "Physics"],
-        dateAdded: "2026-07-05T15:00:00Z",
-        monthlyRevenue: 0,
-        monthlyVisitors: 1250
-    },
-    {
-        id: "real-estate-mgmt",
-        name: "스마트 부동산 관리 앱",
-        url: "../../OneDrive/바탕 화면/부동산관리앱/index.html",
-        category: "utility",
-        status: "active",
-        desc: "임대 매물 분석, 계약 일정 관리, 투자금 대비 임대 수익률 계산기를 원스톱으로 제공하는 로컬 부동산 자산 관리 유틸리티 앱입니다.",
-        tags: ["Local Storage", "JavaScript", "Finance Calc"],
-        dateAdded: "2026-07-07T11:55:00Z",
-        monthlyRevenue: 0,
-        monthlyVisitors: 450
-    },
-    {
-        id: "dog-photoshop",
-        name: "반려견 강아지 포토샵",
-        url: "../../Downloads/강아지포토샵/index.html",
-        category: "utility",
-        status: "active",
-        desc: "강아지 사진에 특화된 이미지 필터 편집기. 귀여운 데코 스티커, 안경/모자 3D 오버레이 및 텍스트 문구 툴로 엽서를 꾸밀 수 있습니다.",
-        tags: ["Canvas API", "Image Filter", "CSS Filters"],
-        dateAdded: "2026-07-06T10:00:00Z",
-        monthlyRevenue: 0,
-        monthlyVisitors: 310
-    },
-    {
-        id: "kodari-dev-mgr",
-        name: "코다리 개발부장 AI 에이전트",
-        url: "../../OneDrive/바탕 화면/코다리개발부장에이전트/index.html",
+        id: "bridge-global-ai",
+        name: "Bridge Global AI (브릿지 글로벌 AI)",
+        url: "https://b-globalai.live",
         category: "ai",
         status: "active",
-        desc: "1인 개발자 및 스타트업을 위한 가상 AI 개발 팀장. 코드 리뷰, 기능 상세 설계, 리팩토링 제안 등 개발 사이클을 가이드해주는 조력자 챗봇 서비스입니다.",
-        tags: ["OpenAI API", "Code Review", "AI Agent"],
-        dateAdded: "2026-07-12T11:00:00Z",
+        desc: "뇌과학과 인공지능을 융합하여 인지 부하, 생리적 상태 및 신경 경로를 분석하고 실시간으로 지능적 대응을 수행하는 차세대 Neural-AI 인터페이스입니다.",
+        tags: ["Neural AI", "Cognitive AI", "Bio-Tech"],
+        dateAdded: "2026-07-16T08:10:00Z",
         monthlyRevenue: 0,
-        monthlyVisitors: 550
+        monthlyVisitors: 0
     },
     {
-        id: "sales-performance",
-        name: "로컬 판매 실적 분석 대시보드",
-        url: "../../OneDrive/바탕 화면/판매실적-local/index.html",
+        id: "care-vision-ai",
+        name: "CareVision AI (케어비전 AI)",
+        url: "https://carevisionai.co.kr",
+        category: "ai",
+        status: "active",
+        desc: "시니어를 위한 스마트 케어 솔루션. 실시간 카메라 화면을 분석하여 낙상 감지, 환자 상태 모니터링 및 실시간 알림을 제공하는 실시간 헬스케어 시스템입니다.",
+        tags: ["Smart Care", "Fall Detection", "Senior Tech"],
+        dateAdded: "2026-07-16T08:10:00Z",
+        monthlyRevenue: 0,
+        monthlyVisitors: 0
+    },
+    {
+        id: "repurpose-ai",
+        name: "Connect AI LAB (커넥트 AI 랩)",
+        url: "https://repurposeai.live",
+        category: "ai",
+        status: "active",
+        desc: "신경 과학과 인공지능의 경계에서 탄생한 Connect AI LAB 플랫폼. 인지 부하, 생리적 반응 패턴 등을 분석하여 적응형 신경 인터페이스 서비스를 구축합니다.",
+        tags: ["Brain AI", "Interface", "R&D"],
+        dateAdded: "2026-07-16T08:10:00Z",
+        monthlyRevenue: 0,
+        monthlyVisitors: 0
+    },
+    {
+        id: "creator-guard",
+        name: "CreatorGuard (크리에이터 가드)",
+        url: "https://creatorguard.cloud",
         category: "business",
         status: "active",
-        desc: "오프라인/온라인 매출 데이터를 CSV 파일로 업로드하여 실시간 월별 통계 차트와 카테고리별 마진율을 즉각 계산하여 시각화해 주는 ERP 솔루션입니다.",
-        tags: ["Chart.js", "CSV Parser", "Data Visual"],
-        dateAdded: "2026-07-13T09:30:00Z",
+        desc: "유튜브 크리에이터 및 콘텐츠 창작자들을 위해 저작권 보호, 표절 감지, 자동 DMCA 요청 및 채널 중단에 대비한 수익 보호 장치를 제공하는 크리에이터 특화 안심 서비스입니다.",
+        tags: ["Copyright", "Creator Economy", "Protection"],
+        dateAdded: "2026-07-16T08:11:00Z",
         monthlyRevenue: 0,
-        monthlyVisitors: 280
+        monthlyVisitors: 0
     },
     {
-        id: "flying-mini-game",
-        name: "플라잉 장애물 회피 게임",
-        url: "../../OneDrive/바탕 화면/플라잉게임/index.html",
+        id: "car-tuning-ai",
+        name: "CarTuning AI (카튜닝 AI)",
+        url: "https://cartuningai.shop",
+        category: "ai",
+        status: "active",
+        desc: "차량 사진 한 장만으로 외관 휠, 스포일러, 데칼, 도색 등을 10초 만에 가상 시뮬레이션해 주는 이미지 생성 기반 자동차 가상 튜닝 시뮬레이터입니다.",
+        tags: ["Car Tuning", "Virtual Simulation", "Image Gen"],
+        dateAdded: "2026-07-16T08:11:00Z",
+        monthlyRevenue: 0,
+        monthlyVisitors: 0
+    },
+    {
+        id: "nabula-arc",
+        name: "Nabula Arc (네뷸라 아크)",
+        url: "https://nabulaarc.xyz",
         category: "game",
         status: "active",
-        desc: "화면 터치나 마우스 클릭으로 비행 캐릭터의 높낮이를 조절하여 끊임없이 나타나는 파이프와 링을 피해 점수를 획득하는 복고풍 미니 아케이드 게임입니다.",
-        tags: ["Game Loop", "Collision Detect", "High Scores"],
-        dateAdded: "2026-07-04T08:00:00Z",
+        desc: "Gemini 2.0 Flash AI 연동 및 실시간 목소리/음성 제어가 결합된 레트로 감성의 고성능 HTML5 Canvas 우주 비행기 슈팅 게임입니다.",
+        tags: ["AI Game", "Voice Control", "Space Shooter"],
+        dateAdded: "2026-07-16T08:11:00Z",
         monthlyRevenue: 0,
-        monthlyVisitors: 1900
-    },
-    {
-        id: "it-law-guide",
-        name: "정보통신법 크리에이터 가이드",
-        url: "../정보통신법유튜버크리이터/index.html",
-        category: "business",
-        status: "active",
-        desc: "유튜버와 1인 방송 크리에이터가 놓치기 쉬운 저작권 가이드라인, 뒷광고 규제 조항 및 유의 사항을 법 조항 기반 AI 질의응답으로 쉽게 해결해 주는 법률 가이드 솔루션입니다.",
-        tags: ["IT Law", "Copyright Guide", "RAG Chat"],
-        dateAdded: "2026-07-14T14:00:00Z",
-        monthlyRevenue: 0,
-        monthlyVisitors: 410
+        monthlyVisitors: 0
     }
 ];
 
@@ -186,7 +174,7 @@ function loadSites() {
     if (saved) {
         try {
             sites = JSON.parse(saved);
-            
+
             // Migration: Add monthlyRevenue and monthlyVisitors to legacy saved cards
             let needsSave = false;
             sites.forEach(site => {
@@ -292,7 +280,7 @@ function convertToProject(id) {
 
     // Remove from sandbox drawer
     deleteIdea(id);
-    
+
     // Close sandbox drawer
     toggleSandbox(false);
 }
@@ -313,24 +301,24 @@ function toggleSandbox(show) {
 function renderStats() {
     const totalCount = sites.length;
     const goalPercent = Math.min((totalCount / 100) * 100, 100);
-    
+
     document.getElementById("progress-bar").style.width = `${goalPercent}%`;
     document.getElementById("total-count-val").textContent = totalCount;
-    
+
     // Sum revenue and visitors
     const totalRevenue = sites.reduce((sum, s) => sum + Number(s.monthlyRevenue || 0), 0);
     const totalVisitors = sites.reduce((sum, s) => sum + Number(s.monthlyVisitors || 0), 0);
-    
+
     document.getElementById("stat-total-revenue").textContent = totalRevenue.toLocaleString() + "원";
     document.getElementById("stat-total-visitors").textContent = totalVisitors.toLocaleString() + "명";
-    
+
     // Count stats by categories & status
     const activeCount = sites.filter(s => s.status === "active").length;
     const devCount = sites.filter(s => s.status === "dev").length;
     const aiCount = sites.filter(s => s.category === "ai").length;
     const gameCount = sites.filter(s => s.category === "game").length;
     const bizCount = sites.filter(s => s.category === "business").length;
-    
+
     document.getElementById("stat-active").textContent = activeCount;
     document.getElementById("stat-dev").textContent = devCount;
     document.getElementById("stat-ai").textContent = aiCount;
@@ -349,7 +337,7 @@ function renderFilters() {
 
     const tagFiltersContainer = document.getElementById("tag-filters");
     tagFiltersContainer.innerHTML = `<span class="tag-filter-title">태그 필터:</span>`;
-    
+
     // All tag badge
     const allBadge = document.createElement("span");
     allBadge.className = `tag-badge-filter ${!currentTag ? 'active' : ''}`;
@@ -370,11 +358,11 @@ function renderFilters() {
 // Filter Actions
 function filterByCategory(category, element) {
     currentCategory = category;
-    
+
     // Manage active tab state
     document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
     element.classList.add("active");
-    
+
     renderSites();
 }
 
@@ -403,11 +391,11 @@ function renderSites() {
     let filtered = sites.filter(site => {
         const matchesCategory = currentCategory === "all" || site.category === currentCategory;
         const matchesTag = !currentTag || (site.tags && site.tags.some(t => t.trim() === currentTag));
-        const matchesSearch = !currentSearch || 
-            site.name.toLowerCase().includes(currentSearch) || 
-            site.desc.toLowerCase().includes(currentSearch) || 
+        const matchesSearch = !currentSearch ||
+            site.name.toLowerCase().includes(currentSearch) ||
+            site.desc.toLowerCase().includes(currentSearch) ||
             (site.tags && site.tags.some(t => t.toLowerCase().includes(currentSearch)));
-        
+
         return matchesCategory && matchesTag && matchesSearch;
     });
 
@@ -439,7 +427,7 @@ function renderSites() {
     filtered.forEach(site => {
         const card = document.createElement("div");
         card.className = "web-card";
-        
+
         // Custom colored border gradients based on category
         let gradient = "linear-gradient(90deg, #8b5cf6, #10b981)";
         if (site.category === "ai") gradient = "linear-gradient(90deg, #a78bfa, #8b5cf6)";
@@ -450,7 +438,7 @@ function renderSites() {
 
         const categoryText = getCategoryLabel(site.category);
         const statusText = site.status === "active" ? "운영 중" : site.status === "dev" ? "개발 중" : "기획 단계";
-        
+
         const tagBadges = (site.tags || []).map(tag => `<span class="card-tag">${escapeHtml(tag)}</span>`).join("");
 
         card.innerHTML = `
@@ -506,11 +494,11 @@ function getCategoryLabel(cat) {
 
 function escapeHtml(unsafe) {
     return unsafe
-         .replace(/&/g, "&amp;")
-         .replace(/</g, "&lt;")
-         .replace(/>/g, "&gt;")
-         .replace(/"/g, "&quot;")
-         .replace(/'/g, "&#039;");
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 }
 
 // Modal Form Operations
@@ -529,7 +517,7 @@ function openEditModal(id) {
     editingSiteId = id;
     document.getElementById("modal-title").textContent = "웹사이트 편집";
     document.getElementById("btn-delete-site").style.display = "block";
-    
+
     document.getElementById("site-name").value = site.name;
     document.getElementById("site-url").value = site.url;
     document.getElementById("site-category").value = site.category;
@@ -538,7 +526,7 @@ function openEditModal(id) {
     document.getElementById("site-visitors").value = site.monthlyVisitors || 0;
     document.getElementById("site-desc").value = site.desc;
     document.getElementById("site-tags").value = (site.tags || []).join(", ");
-    
+
     document.getElementById("site-modal").classList.add("active");
 }
 
@@ -557,7 +545,7 @@ function saveForm(event) {
     const monthlyVisitors = Number(document.getElementById("site-visitors").value) || 0;
     const desc = document.getElementById("site-desc").value;
     const tagsString = document.getElementById("site-tags").value;
-    
+
     const tags = tagsString ? tagsString.split(",").map(t => t.trim()).filter(t => t.length > 0) : [];
 
     if (editingSiteId) {
@@ -603,7 +591,7 @@ function saveForm(event) {
 
 function deleteSite() {
     if (!editingSiteId) return;
-    
+
     if (confirm("정말로 이 웹사이트 등록을 삭제하시겠습니까?")) {
         sites = sites.filter(s => s.id !== editingSiteId);
         saveSites();
@@ -620,12 +608,12 @@ function exportData() {
         const dataStr = JSON.stringify(sites, null, 4);
         const dataBlob = new Blob([dataStr], { type: "application/json" });
         const url = URL.createObjectURL(dataBlob);
-        
+
         const dateStr = new Date().toISOString().slice(0, 10);
         const downloadLink = document.createElement("a");
         downloadLink.href = url;
         downloadLink.download = `all-re-backup-${dateStr}.json`;
-        
+
         document.body.appendChild(downloadLink);
         downloadLink.click();
         document.body.removeChild(downloadLink);
@@ -640,7 +628,7 @@ function importData(event) {
     if (!file) return;
 
     const reader = new FileReader();
-    reader.onload = function(e) {
+    reader.onload = function (e) {
         try {
             const imported = JSON.parse(e.target.result);
             if (!Array.isArray(imported)) {
@@ -648,7 +636,7 @@ function importData(event) {
             }
 
             // Simple validation of required keys
-            const isValid = imported.every(site => 
+            const isValid = imported.every(site =>
                 site.id && site.name && site.url && site.category && site.status && site.desc
             );
 
@@ -686,7 +674,7 @@ function setupEventListeners() {
     document.getElementById("btn-toggle-sandbox").addEventListener("click", () => toggleSandbox(true));
     document.getElementById("btn-close-sandbox").addEventListener("click", () => toggleSandbox(false));
     document.getElementById("drawer-backdrop").addEventListener("click", () => toggleSandbox(false));
-    
+
     // Sandbox Add Idea form
     document.getElementById("sandbox-form").addEventListener("submit", (e) => {
         e.preventDefault();
@@ -702,7 +690,7 @@ function setupEventListeners() {
     document.getElementById("btn-close-modal").addEventListener("click", closeModal);
     document.getElementById("site-form").addEventListener("submit", saveForm);
     document.getElementById("btn-delete-site").addEventListener("click", deleteSite);
-    
+
     // Search input
     document.getElementById("search-box").addEventListener("input", (e) => {
         searchSites(e.target.value);

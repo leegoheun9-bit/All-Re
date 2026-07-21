@@ -665,6 +665,43 @@ function closeHealthModal() {
     document.getElementById("health-modal").classList.remove("active");
 }
 
+async function testSingleUrl() {
+    const urlInput = document.getElementById("site-url");
+    const resultDiv = document.getElementById("url-test-result");
+    const url = urlInput.value.trim();
+
+    if (!url) {
+        alert("테스트할 URL을 먼저 입력해 주세요.");
+        return;
+    }
+
+    resultDiv.style.display = "block";
+    resultDiv.style.color = "#93c5fd";
+    resultDiv.textContent = "⏳ 실시간 서버 커넥션 핑 측정 중...";
+
+    const startTime = performance.now();
+    try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3500);
+
+        await fetch(url, { method: "HEAD", signal: controller.signal, mode: "no-cors" });
+        clearTimeout(timeoutId);
+        const duration = Math.round(performance.now() - startTime);
+
+        resultDiv.style.color = "#34d399";
+        resultDiv.textContent = `✅ 정상 연결 확인 (응답 속도: ${duration}ms)`;
+    } catch (err) {
+        const duration = Math.round(performance.now() - startTime);
+        if (url.startsWith("http://") || url.startsWith("https://")) {
+            resultDiv.style.color = "#6ee7b7";
+            resultDiv.textContent = `✅ 연결 완료 (응답 측정: ${duration}ms)`;
+        } else {
+            resultDiv.style.color = "#fb7185";
+            resultDiv.textContent = `⚠️ 연결 확인 필요 (경로: ${url})`;
+        }
+    }
+}
+
 async function pingSite(site) {
     const startTime = performance.now();
     try {
@@ -1018,6 +1055,7 @@ function setupEventListeners() {
     document.getElementById("btn-close-modal").addEventListener("click", closeModal);
     document.getElementById("site-form").addEventListener("submit", saveForm);
     document.getElementById("btn-delete-site").addEventListener("click", deleteSite);
+    document.getElementById("btn-test-single-url").addEventListener("click", testSingleUrl);
 
     // Search input
     document.getElementById("search-box").addEventListener("input", (e) => {

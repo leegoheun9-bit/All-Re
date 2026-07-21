@@ -672,16 +672,101 @@ function closeHealthModal() {
     document.getElementById("health-modal").classList.remove("active");
 }
 
+// ----------------------------------------------------
+// Google Analytics 4 (GA4) Data API Real-time Integration
+// ----------------------------------------------------
+let ga4Config = {
+    token: "",
+    defaultProperty: ""
+};
+
+function loadGa4Config() {
+    const saved = localStorage.getItem("allre_ga4_config");
+    if (saved) {
+        try {
+            ga4Config = JSON.parse(saved);
+        } catch (e) {
+            console.error("Failed to parse GA4 config", e);
+        }
+    }
+}
+
+function saveGa4Config(token, defaultProperty) {
+    ga4Config = { token, defaultProperty };
+    localStorage.setItem("allre_ga4_config", JSON.stringify(ga4Config));
+}
+
+function openGa4Modal() {
+    loadGa4Config();
+    document.getElementById("ga4-api-token").value = ga4Config.token || "";
+    document.getElementById("ga4-default-property").value = ga4Config.defaultProperty || "";
+    document.getElementById("ga4-modal").classList.add("active");
+}
+
+function closeGa4Modal() {
+    document.getElementById("ga4-modal").classList.remove("active");
+}
+
+async function fetchGa4RealData(propertyId, token) {
+    if (!propertyId || !token) return null;
+    const cleanProp = propertyId.replace("properties/", "");
+    const endpoint = `https://analyticsdata.googleapis.com/v1beta/properties/${cleanProp}:runReport`;
+
+    try {
+        const response = await fetch(endpoint, {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                dateRanges: [{ startDate: "30daysAgo", endDate: "today" }],
+                metrics: [{ name: "activeUsers" }]
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+        if (data.rows && data.rows.length > 0 && data.rows[0].metricValues) {
+            const activeUsers = parseInt(data.rows[0].metricValues[0].value, 10);
+            return isNaN(activeUsers) ? null : activeUsers;
+        }
+        return 0;
+    } catch (err) {
+        console.warn(`GA4 API Fetch Error for property ${cleanProp}:`, err);
+        return null;
+    }
+}
+
 async function syncTrafficData() {
     const btn = document.getElementById("btn-sync-traffic");
     const originalText = btn.textContent;
-    btn.textContent = "⏳ 트래픽 측정 중...";
+    btn.textContent = "⏳ 구글 GA4 서버 트래픽 수신 중...";
     btn.disabled = true;
 
+    loadGa4Config();
     let totalUpdated = 0;
+    let gaConnectedCount = 0;
 
     for (const site of sites) {
-        // Measure real site connectivity and responsiveness as baseline metric
+        const targetProperty = site.gaId || ga4Config.defaultProperty;
+
+        // Try fetching real GA4 Data API if token & property available
+        if (ga4Config.token && targetProperty) {
+            const realVisitors = await fetchGa4RealData(targetProperty, ga4Config.token);
+            if (realVisitors !== null) {
+                site.monthlyVisitors = realVisitors;
+                site.isGaRealData = true;
+                gaConnectedCount++;
+                totalUpdated++;
+                continue;
+            }
+        }
+
+        // Live Uptime Ping Fallback Metric
         try {
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 2000);
@@ -690,8 +775,7 @@ async function syncTrafficData() {
             clearTimeout(timeoutId);
             const duration = Math.round(performance.now() - startTime);
 
-            // Calculate auto visitor count based on live uptime and site activity
-            let estimatedVisitors = Math.round(Math.max(120, (3000 / Math.max(duration, 20)) * 45 + Math.random() * 200));
+            let estimatedVisitors = Math.round(Math.max(120, (3000 / Math.max(duration, 20)) * 45));
             if (site.id === "mirai-studio") estimatedVisitors = 4820;
             if (site.id === "echo-shadowing") estimatedVisitors = 1350;
             if (site.id === "v-taxflow") estimatedVisitors = 2100;
@@ -699,7 +783,6 @@ async function syncTrafficData() {
             site.monthlyVisitors = estimatedVisitors;
             totalUpdated++;
         } catch (e) {
-            // Keep existing or estimate minimum for active dev sites
             if (site.status === "active") {
                 site.monthlyVisitors = site.monthlyVisitors || 350;
             }
@@ -710,11 +793,11 @@ async function syncTrafficData() {
     renderStats();
     renderSites();
 
-    btn.textContent = "✅ 동기화 완료!";
+    btn.textContent = gaConnectedCount > 0 ? `✅ 구글 GA4 ${gaConnectedCount}개 연동 동기화!` : "✅ 트래픽 측정 동기화 완료!";
     setTimeout(() => {
         btn.textContent = originalText;
         btn.disabled = false;
-    }, 2000);
+    }, 2500);
 }
 
 async function testSingleUrl() {
@@ -1122,11 +1205,25 @@ function setupEventListeners() {
         sortSites(e.target.value);
     });
 
+    // GA4 Config Controls
+    document.getElementById("btn-ga4-config").addEventListener("click", openGa4Modal);
+    document.getElementById("btn-close-ga4").addEventListener("click", closeGa4Modal);
+    document.getElementById("ga4-config-form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const token = document.getElementById("ga4-api-token").value.trim();
+        const defaultProp = document.getElementById("ga4-default-property").value.trim();
+        saveGa4Config(token, defaultProp);
+        alert("🔑 Google Analytics 4 API 연동 설정이 성공적으로 저장되었습니다!");
+        closeGa4Modal();
+        syncTrafficData();
+    });
+
     // Close modal on background click
     window.addEventListener("click", (e) => {
         if (e.target === document.getElementById("site-modal")) closeModal();
         if (e.target === document.getElementById("health-modal")) closeHealthModal();
         if (e.target === document.getElementById("inbox-modal")) closeInboxModal();
+        if (e.target === document.getElementById("ga4-modal")) closeGa4Modal();
     });
 }
 

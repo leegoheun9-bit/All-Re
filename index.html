@@ -19,6 +19,9 @@
                 <p>1인 기업가의 100개 웹서비스 빌드 챌린지 통합 허브</p>
             </div>
             <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+                <button id="btn-ga4-config" class="btn-secondary" style="padding: 0.6rem 1.2rem; font-size: 0.85rem; border-color: rgba(245, 158, 11, 0.4); color: #fbbf24;" aria-label="GA4 Data API 연동 설정">
+                    🔑 GA4 API 연동 설정
+                </button>
                 <button id="btn-sync-traffic" class="btn-secondary" style="padding: 0.6rem 1.2rem; font-size: 0.85rem; border-color: rgba(52, 211, 153, 0.4); color: #34d399;" aria-label="실시간 트래픽 자동 동기화">
                     📈 트래픽 자동 동기화
                 </button>
@@ -274,6 +277,36 @@
             <div id="inbox-list" style="max-height: 420px; overflow-y: auto; display: flex; flex-direction: column; gap: 0.8rem;">
                 <!-- Notifications populated dynamically -->
             </div>
+        </div>
+    </div>
+
+    <!-- GA4 Data API Config Modal -->
+    <div id="ga4-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="ga4-modal-title">
+        <div class="modal-content" style="max-width: 650px;">
+            <div class="modal-header">
+                <h2 id="ga4-modal-title" class="modal-title">🔑 Google Analytics (GA4) API 연동</h2>
+                <button id="btn-close-ga4" class="btn-close-modal" aria-label="모달 닫기">&times;</button>
+            </div>
+            <div style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.2); padding: 1rem; border-radius: 12px; margin-bottom: 1.2rem; font-size: 0.85rem; color: #fef08a; line-height: 1.5;">
+                <strong>💡 구글 서버 실시간 방문자 수 자동 연결 가이드</strong><br>
+                Google Analytics 4 Data API를 통해 구글 서버로부터 100% 진짜 방문자 수 수치를 직접 수신합니다.<br>
+                Google Cloud Console에서 발급받은 <strong>Data API Access Token / Key</strong>를 등록해 주세요.
+            </div>
+            <form id="ga4-config-form">
+                <div class="form-group">
+                    <label for="ga4-api-token">Google Cloud OAuth / Service Token *</label>
+                    <input type="password" id="ga4-api-token" class="form-control" placeholder="ya29.a0A..." required>
+                </div>
+                <div class="form-group">
+                    <label for="ga4-default-property">기본 GA4 Property ID (예: 123456789)</label>
+                    <input type="text" id="ga4-default-property" class="form-control" placeholder="properties/123456789">
+                </div>
+                <div id="ga4-status-msg" style="font-size: 0.8rem; margin-bottom: 1rem; display: none;"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeGa4Modal()">취소</button>
+                    <button type="submit" class="btn-primary" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">저장 및 구글 연동</button>
+                </div>
+            </form>
         </div>
     </div>
 

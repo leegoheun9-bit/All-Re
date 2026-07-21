@@ -10,7 +10,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏆</text></svg>">
 
     <!-- CSS Stylesheet -->
-    <link rel="stylesheet" href="style.css?v=20260721_2">
+    <link rel="stylesheet" href="style.css?v=20260721_3">
 </head>
 <body>
 
@@ -28,13 +28,13 @@
                 <button id="btn-sync-traffic" class="btn-secondary" style="padding: 0.6rem 1.2rem; font-size: 0.85rem; border-color: rgba(52, 211, 153, 0.4); color: #34d399;" aria-label="실시간 트래픽 자동 동기화">
                     📈 트래픽 자동 동기화
                 </button>
-                <button id="btn-toggle-health" class="btn-secondary" style="padding: 0.6rem 1.2rem; font-size: 0.85rem; border-color: rgba(16, 185, 129, 0.4); color: #6ee7b7;" aria-label="서버 헬스 체크 열기">
+                <button id="btn-toggle-health" class="btn-secondary" onclick="openHealthModal()" style="padding: 0.6rem 1.2rem; font-size: 0.85rem; border-color: rgba(16, 185, 129, 0.4); color: #6ee7b7; cursor: pointer;" aria-label="서버 헬스 체크 열기">
                     ⚡ 헬스 체크
                 </button>
-                <button id="btn-toggle-inbox" class="btn-secondary" style="padding: 0.6rem 1.2rem; font-size: 0.85rem; border-color: rgba(59, 130, 246, 0.4); color: #93c5fd; position: relative;" aria-label="통합 알림 수신함 열기">
+                <button id="btn-toggle-inbox" class="btn-secondary" onclick="openInboxModal()" style="padding: 0.6rem 1.2rem; font-size: 0.85rem; border-color: rgba(59, 130, 246, 0.4); color: #93c5fd; position: relative; cursor: pointer;" aria-label="통합 알림 수신함 열기">
                     🔔 통합 알림 <span id="inbox-badge" class="notification-badge" style="display: none;">0</span>
                 </button>
-                <button id="btn-toggle-sandbox" class="btn-secondary" style="padding: 0.6rem 1.2rem; font-size: 0.85rem; border-color: rgba(244, 63, 94, 0.4); color: #fb7185;" aria-label="아이디어 샌드박스 열기">
+                <button id="btn-toggle-sandbox" class="btn-secondary" onclick="toggleSandbox(true)" style="padding: 0.6rem 1.2rem; font-size: 0.85rem; border-color: rgba(244, 63, 94, 0.4); color: #fb7185; cursor: pointer;" aria-label="아이디어 샌드박스 열기">
                     💡 아이디어 보드
                 </button>
                 <button id="btn-export" class="btn-secondary" style="padding: 0.6rem 1.2rem; font-size: 0.85rem;" aria-label="데이터 백업">
@@ -339,6 +339,6 @@
     </div>
 
     <!-- JS Logic -->
-    <script src="app.js?v=20260721_2"></script>
+    <script src="app.js?v=20260721_3"></script>
 </body>
 </html>

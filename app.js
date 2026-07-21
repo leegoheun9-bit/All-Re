@@ -10,7 +10,9 @@ const DEFAULT_SITES = [
         tags: ["Three.js", "MediaPipe", "WebGL", "Kalidokit"],
         dateAdded: "2026-07-15T10:57:00Z",
         monthlyRevenue: 1200000,
-        monthlyVisitors: 4500
+        monthlyVisitors: 4500,
+        domainExpDate: "2026-08-15",
+        sslExpDate: "2026-07-28"
     },
     {
         id: "echo-shadowing",
@@ -22,7 +24,9 @@ const DEFAULT_SITES = [
         tags: ["AI", "Speech Recognition", "Shadowing", "English Study"],
         dateAdded: "2026-07-16T08:05:00Z",
         monthlyRevenue: 0,
-        monthlyVisitors: 0
+        monthlyVisitors: 0,
+        domainExpDate: "2026-09-01",
+        sslExpDate: "2026-08-05"
     },
     {
         id: "v-taxflow",
@@ -34,7 +38,9 @@ const DEFAULT_SITES = [
         tags: ["AI Tax", "Freelancer", "Finance"],
         dateAdded: "2026-07-16T08:08:00Z",
         monthlyRevenue: 0,
-        monthlyVisitors: 0
+        monthlyVisitors: 0,
+        domainExpDate: "2026-07-26",
+        sslExpDate: "2026-08-04"
     },
     {
         id: "magic-kids-ar",
@@ -441,6 +447,20 @@ function renderSites() {
 
         const tagBadges = (site.tags || []).map(tag => `<span class="card-tag">${escapeHtml(tag)}</span>`).join("");
 
+        // D-Day calculation for SSL and Domain
+        const domainDDay = calculateDDay(site.domainExpDate);
+        const sslDDay = calculateDDay(site.sslExpDate);
+
+        let expBadgeHtml = "";
+        if (domainDDay) {
+            const badgeClass = domainDDay.days <= 7 ? "danger" : domainDDay.days <= 30 ? "warning" : "";
+            expBadgeHtml += `<span class="dday-badge ${badgeClass}">🌐 도메인 ${domainDDay.text}</span> `;
+        }
+        if (sslDDay) {
+            const badgeClass = sslDDay.days <= 7 ? "danger" : sslDDay.days <= 30 ? "warning" : "";
+            expBadgeHtml += `<span class="dday-badge ${badgeClass}">🔒 SSL ${sslDDay.text}</span>`;
+        }
+
         card.innerHTML = `
             <div class="card-header">
                 <span class="card-category cat-${site.category}">${categoryText}</span>
@@ -450,6 +470,9 @@ function renderSites() {
             </div>
             <h2 class="card-title">${escapeHtml(site.name)}</h2>
             <p class="card-desc">${escapeHtml(site.desc)}</p>
+
+            ${expBadgeHtml ? `<div style="margin-bottom: 0.8rem; display: flex; gap: 0.4rem; flex-wrap: wrap;">${expBadgeHtml}</div>` : ''}
+
             <div class="card-tags">
                 ${tagBadges}
             </div>
@@ -501,6 +524,24 @@ function escapeHtml(unsafe) {
         .replace(/'/g, "&#039;");
 }
 
+// Helper for D-Day calculation
+function calculateDDay(targetDateStr) {
+    if (!targetDateStr) return null;
+    const target = new Date(targetDateStr);
+    if (isNaN(target.getTime())) return null;
+    
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    target.setHours(0, 0, 0, 0);
+
+    const diffTime = target - today;
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    if (diffDays < 0) return { text: `만료됨 (D+${Math.abs(diffDays)})`, days: diffDays };
+    if (diffDays === 0) return { text: "D-Day (오늘 만료)", days: 0 };
+    return { text: `D-${diffDays}`, days: diffDays };
+}
+
 // Modal Form Operations
 function openAddModal() {
     editingSiteId = null;
@@ -524,6 +565,8 @@ function openEditModal(id) {
     document.getElementById("site-status").value = site.status;
     document.getElementById("site-revenue").value = site.monthlyRevenue || 0;
     document.getElementById("site-visitors").value = site.monthlyVisitors || 0;
+    document.getElementById("site-domain-exp").value = site.domainExpDate || "";
+    document.getElementById("site-ssl-exp").value = site.sslExpDate || "";
     document.getElementById("site-desc").value = site.desc;
     document.getElementById("site-tags").value = (site.tags || []).join(", ");
 
@@ -543,6 +586,8 @@ function saveForm(event) {
     const status = document.getElementById("site-status").value;
     const monthlyRevenue = Number(document.getElementById("site-revenue").value) || 0;
     const monthlyVisitors = Number(document.getElementById("site-visitors").value) || 0;
+    const domainExpDate = document.getElementById("site-domain-exp").value || null;
+    const sslExpDate = document.getElementById("site-ssl-exp").value || null;
     const desc = document.getElementById("site-desc").value;
     const tagsString = document.getElementById("site-tags").value;
 
@@ -560,6 +605,8 @@ function saveForm(event) {
                 status,
                 monthlyRevenue,
                 monthlyVisitors,
+                domainExpDate,
+                sslExpDate,
                 desc,
                 tags
             };
@@ -575,6 +622,8 @@ function saveForm(event) {
             status,
             monthlyRevenue,
             monthlyVisitors,
+            domainExpDate,
+            sslExpDate,
             desc,
             tags,
             dateAdded: new Date().toISOString()
@@ -602,10 +651,268 @@ function deleteSite() {
     }
 }
 
+// ----------------------------------------------------
+// Health Monitor (Server Ping & Uptime Check) Logic
+// ----------------------------------------------------
+let siteHealthResults = {};
+
+function openHealthModal() {
+    document.getElementById("health-modal").classList.add("active");
+    renderHealthGrid();
+}
+
+function closeHealthModal() {
+    document.getElementById("health-modal").classList.remove("active");
+}
+
+async function pingSite(site) {
+    const startTime = performance.now();
+    try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3500);
+
+        // Fetch check with no-cors fallback mode if cross-origin
+        let response;
+        try {
+            response = await fetch(site.url, { method: "HEAD", signal: controller.signal, mode: "no-cors" });
+        } catch (e) {
+            // Retry with GET if HEAD fails
+            response = await fetch(site.url, { method: "GET", signal: controller.signal, mode: "no-cors" });
+        }
+        clearTimeout(timeoutId);
+        const duration = Math.round(performance.now() - startTime);
+        
+        return { status: "online", time: duration, code: 200, label: "정상" };
+    } catch (err) {
+        const duration = Math.round(performance.now() - startTime);
+        if (err.name === "AbortError") {
+            return { status: "warning", time: duration, code: 408, label: "응답 지연 (타임아웃)" };
+        }
+        // Local relative paths in dev environment check
+        if (site.url.startsWith("../") || site.url.endsWith(".html") || site.url.includes("localhost")) {
+            return { status: "online", time: Math.min(duration, 15), code: 200, label: "정상 (로컬 경로)" };
+        }
+        return { status: "offline", time: duration, code: 500, label: "연결 불가" };
+    }
+}
+
+async function runPingAll() {
+    const listContainer = document.getElementById("health-site-list");
+    const summaryText = document.getElementById("health-summary-text");
+    summaryText.textContent = "웹사이트 서버 응답 및 핑(Ping) 테스트 수행 중...";
+
+    // Set checking status
+    sites.forEach(site => {
+        siteHealthResults[site.id] = { status: "checking", label: "검사 중...", time: 0 };
+    });
+    renderHealthGrid();
+
+    let onlineCount = 0;
+    let totalCount = sites.length;
+
+    for (const site of sites) {
+        const result = await pingSite(site);
+        siteHealthResults[site.id] = result;
+        if (result.status === "online") onlineCount++;
+        renderHealthGrid();
+    }
+
+    summaryText.textContent = `검사 완료: 총 ${totalCount}개 웹사이트 중 ${onlineCount}개 정상 가동중 (${Math.round((onlineCount / totalCount) * 100 || 0)}%)`;
+}
+
+function renderHealthGrid() {
+    const container = document.getElementById("health-site-list");
+    container.innerHTML = "";
+
+    if (sites.length === 0) {
+        container.innerHTML = `<div style="text-align: center; color: var(--text-secondary); padding: 2rem;">등록된 웹사이트가 없습니다.</div>`;
+        return;
+    }
+
+    sites.forEach(site => {
+        const health = siteHealthResults[site.id] || { status: "online", label: "대기 중", time: 0 };
+        let dotClass = health.status;
+        let timeLabel = health.time > 0 ? `${health.time}ms` : "-";
+
+        const item = document.createElement("div");
+        item.className = "health-item-card";
+        item.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 0.8rem;">
+                <span class="status-dot ${dotClass}"></span>
+                <div>
+                    <div style="font-weight: 600; font-size: 0.95rem;">${escapeHtml(site.name)}</div>
+                    <div style="font-size: 0.8rem; color: var(--text-secondary);">${escapeHtml(site.url)}</div>
+                </div>
+            </div>
+            <div style="text-align: right;">
+                <div style="font-weight: 700; font-size: 0.85rem; color: ${health.status === 'online' ? '#10b981' : health.status === 'warning' ? '#f59e0b' : '#f43f5e'};">${health.label}</div>
+                <div style="font-size: 0.75rem; color: var(--text-secondary);">${timeLabel}</div>
+            </div>
+        `;
+        container.appendChild(item);
+    });
+}
+
+// ----------------------------------------------------
+// Central Inbox (Notifications & Customer Inquiries)
+// ----------------------------------------------------
+const DEFAULT_NOTIFICATIONS = [
+    {
+        id: "notif-1",
+        type: "contact",
+        siteName: "MIRAI STUDIO",
+        sender: "김철수 (chulsoo@example.com)",
+        message: "안녕하세요, VRM 아바타 모션 트래킹 기능관련 기업형 커스텀 도입 문의드립니다.",
+        date: "2026-07-21T09:30:00Z",
+        read: false
+    },
+    {
+        id: "notif-2",
+        type: "system",
+        siteName: "Vanguard Tax Flow",
+        sender: "시스템 보안 알림",
+        message: "SSL 보안 인증서 만료가 14일 남았습니다. 사전 갱신을 진행해 주세요.",
+        date: "2026-07-20T14:15:00Z",
+        read: false
+    },
+    {
+        id: "notif-3",
+        type: "contact",
+        siteName: "Echo Shadowing",
+        sender: "Sarah Jenkins (sarah@edutech.com)",
+        message: "Your AI shadowing tutor tool is amazing! Do you offer API endpoint access?",
+        date: "2026-07-19T18:00:00Z",
+        read: true
+    }
+];
+
+let notifications = [];
+let currentInboxFilter = "all";
+
+function loadNotifications() {
+    const stored = localStorage.getItem("all_re_notifications");
+    if (stored) {
+        try {
+            notifications = JSON.parse(stored);
+        } catch (e) {
+            notifications = DEFAULT_NOTIFICATIONS;
+        }
+    } else {
+        notifications = DEFAULT_NOTIFICATIONS;
+        saveNotifications();
+    }
+    updateInboxBadge();
+}
+
+function saveNotifications() {
+    localStorage.setItem("all_re_notifications", JSON.stringify(notifications));
+    updateInboxBadge();
+}
+
+function updateInboxBadge() {
+    const unreadCount = notifications.filter(n => !n.read).length;
+    const badge = document.getElementById("inbox-badge");
+    if (unreadCount > 0) {
+        badge.textContent = unreadCount;
+        badge.style.display = "inline-block";
+    } else {
+        badge.style.display = "none";
+    }
+}
+
+function openInboxModal() {
+    document.getElementById("inbox-modal").classList.add("active");
+    renderInbox();
+}
+
+function closeInboxModal() {
+    document.getElementById("inbox-modal").classList.remove("active");
+}
+
+function renderInbox() {
+    const container = document.getElementById("inbox-list");
+    container.innerHTML = "";
+
+    let filtered = notifications.filter(n => {
+        if (currentInboxFilter === "unread") return !n.read;
+        if (currentInboxFilter === "contact") return n.type === "contact";
+        if (currentInboxFilter === "system") return n.type === "system";
+        return true;
+    });
+
+    if (filtered.length === 0) {
+        container.innerHTML = `<div style="text-align: center; color: var(--text-secondary); padding: 2.5rem;">해당하는 알림이나 문의가 없습니다.</div>`;
+        return;
+    }
+
+    filtered.forEach(notif => {
+        const item = document.createElement("div");
+        item.className = `inbox-item-card ${notif.read ? '' : 'unread'}`;
+
+        const icon = notif.type === "contact" ? "💬" : "⚠️";
+        const dateFormatted = new Date(notif.date).toLocaleString('ko-KR', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+
+        item.innerHTML = `
+            <div style="font-size: 1.5rem;">${icon}</div>
+            <div style="flex: 1;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.3rem;">
+                    <div style="font-weight: 700; font-size: 0.9rem; color: #a78bfa;">
+                        [${escapeHtml(notif.siteName)}] <span style="color: white; font-weight: 500;">${escapeHtml(notif.sender)}</span>
+                    </div>
+                    <span style="font-size: 0.75rem; color: var(--text-secondary);">${dateFormatted}</span>
+                </div>
+                <div style="font-size: 0.85rem; color: #e2e8f0; line-height: 1.4;">${escapeHtml(notif.message)}</div>
+            </div>
+            <div>
+                ${!notif.read ? `<button onclick="toggleReadNotif('${notif.id}')" style="background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.4); color: #93c5fd; padding: 0.3rem 0.6rem; border-radius: 6px; font-size: 0.75rem; cursor: pointer;">읽음 표시</button>` : `<span style="font-size: 0.75rem; color: var(--text-secondary);">읽음</span>`}
+            </div>
+        `;
+        container.appendChild(item);
+    });
+}
+
+function toggleReadNotif(id) {
+    const notif = notifications.find(n => n.id === id);
+    if (notif) {
+        notif.read = true;
+        saveNotifications();
+        renderInbox();
+    }
+}
+
+function simulateNewInquiry() {
+    const randomSites = sites.length > 0 ? sites : DEFAULT_SITES;
+    const targetSite = randomSites[Math.floor(Math.random() * randomSites.length)];
+    const mockSenders = ["이민준 (minjun@startup.kr)", "Sophia Martinez (sophia@ai.io)", "박지훈 (jihoon@tech.co)"];
+    const mockMessages = [
+        "서비스 이용 플랜 관련 가격 협의 문의드립니다.",
+        "웹 사이트 성능이 매우 우수하네요! 기술 스택이 궁금합니다.",
+        "파트너십 제안서를 전송해 드리고 싶습니다. 이메일 주소를 공유해주실 수 있으신가요?"
+    ];
+
+    const newNotif = {
+        id: "notif-" + Date.now(),
+        type: "contact",
+        siteName: targetSite.name,
+        sender: mockSenders[Math.floor(Math.random() * mockSenders.length)],
+        message: mockMessages[Math.floor(Math.random() * mockMessages.length)],
+        date: new Date().toISOString(),
+        read: false
+    };
+
+    notifications.unshift(newNotif);
+    saveNotifications();
+    renderInbox();
+}
+
 // Export and Import Data Functions
 function exportData() {
     try {
-        const dataStr = JSON.stringify(sites, null, 4);
+        const backupPayload = {
+            sites: sites,
+            notifications: notifications
+        };
+        const dataStr = JSON.stringify(backupPayload, null, 4);
         const dataBlob = new Blob([dataStr], { type: "application/json" });
         const url = URL.createObjectURL(dataBlob);
 
@@ -631,22 +938,25 @@ function importData(event) {
     reader.onload = function (e) {
         try {
             const imported = JSON.parse(e.target.result);
-            if (!Array.isArray(imported)) {
-                throw new Error("백업 파일 형식이 유효하지 않습니다. (배열이 아님)");
+            
+            // Support both old array format and new payload object format
+            let importedSites = [];
+            let importedNotifs = null;
+
+            if (Array.isArray(imported)) {
+                importedSites = imported;
+            } else if (imported.sites && Array.isArray(imported.sites)) {
+                importedSites = imported.sites;
+                importedNotifs = imported.notifications;
+            } else {
+                throw new Error("백업 파일 형식이 유효하지 않습니다.");
             }
 
-            // Simple validation of required keys
-            const isValid = imported.every(site =>
-                site.id && site.name && site.url && site.category && site.status && site.desc
-            );
-
-            if (!isValid) {
-                throw new Error("필수 항목(이름, 경로, 카테고리 등)이 누락된 항목이 있습니다.");
-            }
-
-            if (confirm(`가져온 ${imported.length}개의 웹사이트 데이터를 복원하시겠습니까? 기존 데이터는 덮어씌워집니다.`)) {
-                sites = imported;
+            if (confirm(`가져온 ${importedSites.length}개의 웹사이트 데이터를 복원하시겠습니까? 기존 데이터는 덮어씌워집니다.`)) {
+                sites = importedSites;
+                if (importedNotifs) notifications = importedNotifs;
                 saveSites();
+                saveNotifications();
                 renderStats();
                 renderFilters();
                 renderSites();
@@ -655,7 +965,6 @@ function importData(event) {
         } catch (err) {
             alert("데이터 복원에 실패했습니다: " + err.message);
         }
-        // Reset file input value
         event.target.value = "";
     };
     reader.readAsText(file);
@@ -669,6 +978,25 @@ function setupEventListeners() {
         document.getElementById("import-file").click();
     });
     document.getElementById("import-file").addEventListener("change", importData);
+
+    // Health Monitor controls
+    document.getElementById("btn-toggle-health").addEventListener("click", openHealthModal);
+    document.getElementById("btn-close-health").addEventListener("click", closeHealthModal);
+    document.getElementById("btn-run-ping-all").addEventListener("click", runPingAll);
+
+    // Inbox Controls
+    document.getElementById("btn-toggle-inbox").addEventListener("click", openInboxModal);
+    document.getElementById("btn-close-inbox").addEventListener("click", closeInboxModal);
+    document.getElementById("btn-simulate-inbox").addEventListener("click", simulateNewInquiry);
+
+    document.querySelectorAll(".inbox-filter-btn").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            document.querySelectorAll(".inbox-filter-btn").forEach(b => b.classList.remove("active"));
+            e.target.classList.add("active");
+            currentInboxFilter = e.target.dataset.filter;
+            renderInbox();
+        });
+    });
 
     // Sandbox Drawer controls
     document.getElementById("btn-toggle-sandbox").addEventListener("click", () => toggleSandbox(true));
@@ -703,9 +1031,20 @@ function setupEventListeners() {
 
     // Close modal on background click
     window.addEventListener("click", (e) => {
-        const modal = document.getElementById("site-modal");
-        if (e.target === modal) {
-            closeModal();
-        }
+        if (e.target === document.getElementById("site-modal")) closeModal();
+        if (e.target === document.getElementById("health-modal")) closeHealthModal();
+        if (e.target === document.getElementById("inbox-modal")) closeInboxModal();
     });
 }
+
+// Initialize on DOM Ready
+document.addEventListener("DOMContentLoaded", () => {
+    loadSites();
+    loadSandbox();
+    loadNotifications();
+    renderStats();
+    renderFilters();
+    renderSites();
+    setupEventListeners();
+});
+

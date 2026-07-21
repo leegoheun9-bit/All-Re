@@ -871,3 +871,143 @@ textarea.form-control {
         right: -100%;
     }
 }
+
+/* Notification Badge */
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #f43f5e;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(244, 63, 94, 0.6);
+}
+
+/* Expiration & D-Day Tags */
+.dday-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+}
+
+.dday-badge.warning {
+    background: rgba(245, 158, 11, 0.15);
+    border-color: rgba(245, 158, 11, 0.3);
+    color: #fbbf24;
+    box-shadow: 0 0 8px rgba(245, 158, 11, 0.2);
+}
+
+.dday-badge.danger {
+    background: rgba(244, 63, 94, 0.15);
+    border-color: rgba(244, 63, 94, 0.4);
+    color: #f43f5e;
+    box-shadow: 0 0 10px rgba(244, 63, 94, 0.3);
+    animation: pulseGlow 2s infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+/* Health Grid in Modal */
+.health-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.health-item-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    padding: 0.9rem 1.2rem;
+    border-radius: 12px;
+    transition: var(--transition);
+}
+
+.health-item-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.status-dot.online {
+    background: #10b981;
+    box-shadow: 0 0 8px #10b981;
+}
+
+.status-dot.warning {
+    background: #f59e0b;
+    box-shadow: 0 0 8px #f59e0b;
+}
+
+.status-dot.offline {
+    background: #f43f5e;
+    box-shadow: 0 0 8px #f43f5e;
+}
+
+.status-dot.checking {
+    background: #60a5fa;
+    box-shadow: 0 0 8px #60a5fa;
+    animation: pulseGlow 1s infinite;
+}
+
+/* Central Inbox UI */
+.inbox-filter-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.inbox-filter-btn.active, .inbox-filter-btn:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+.inbox-item-card {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 1rem;
+    border-radius: 12px;
+    transition: var(--transition);
+    position: relative;
+}
+
+.inbox-item-card.unread {
+    background: rgba(59, 130, 246, 0.06);
+    border-color: rgba(59, 130, 246, 0.25);
+}
+
+.inbox-item-card:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+}
+

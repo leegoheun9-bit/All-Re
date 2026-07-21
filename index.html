@@ -19,6 +19,12 @@
                 <p>1인 기업가의 100개 웹서비스 빌드 챌린지 통합 허브</p>
             </div>
             <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
+                <button id="btn-toggle-health" class="btn-secondary" style="padding: 0.6rem 1.2rem; font-size: 0.85rem; border-color: rgba(16, 185, 129, 0.4); color: #6ee7b7;" aria-label="서버 헬스 체크 열기">
+                    ⚡ 헬스 체크
+                </button>
+                <button id="btn-toggle-inbox" class="btn-secondary" style="padding: 0.6rem 1.2rem; font-size: 0.85rem; border-color: rgba(59, 130, 246, 0.4); color: #93c5fd; position: relative;" aria-label="통합 알림 수신함 열기">
+                    🔔 통합 알림 <span id="inbox-badge" class="notification-badge" style="display: none;">0</span>
+                </button>
                 <button id="btn-toggle-sandbox" class="btn-secondary" style="padding: 0.6rem 1.2rem; font-size: 0.85rem; border-color: rgba(244, 63, 94, 0.4); color: #fb7185;" aria-label="아이디어 샌드박스 열기">
                     💡 아이디어 보드
                 </button>
@@ -29,7 +35,7 @@
                     📥 복원 (Import)
                 </button>
                 <input type="file" id="import-file" style="display: none;" accept=".json">
-                <button id="btn-add-site" class="btn-primary" style="padding: 0.65rem 1.3rem; font-size: 0.9rem;" aria-label="새 웹사이트 추가">
+                <button id="btn-add-site" class="btn-primary" style="padding: 0.65rem 1.3rem; font-size: 0.9rem;" aria-label="새 웹사이트 등록">
                     <span>+</span> 새 웹사이트 등록
                 </button>
             </div>
@@ -181,6 +187,17 @@
                     </div>
                 </div>
 
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem;">
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label for="site-domain-exp">🌐 도메인 만료 예정일</label>
+                        <input type="date" id="site-domain-exp" class="form-control">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label for="site-ssl-exp">🔒 SSL 만료 예정일</label>
+                        <input type="date" id="site-ssl-exp" class="form-control">
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <label for="site-tags">태그 (쉼표로 구분)</label>
                     <input type="text" id="site-tags" class="form-control" placeholder="예: Three.js, AI, Vision, 3D">
@@ -197,6 +214,52 @@
                     <button type="submit" class="btn-primary">저장</button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <!-- Health Check Monitor Modal -->
+    <div id="health-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="health-modal-title">
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header">
+                <h2 id="health-modal-title" class="modal-title">⚡ 서버 헬스 체크 & 업타임 모니터</h2>
+                <button id="btn-close-health" class="btn-close-modal" aria-label="모달 닫기">&times;</button>
+            </div>
+            <div style="margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; background: rgba(16, 185, 129, 0.05); padding: 1rem; border-radius: 12px; border: 1px solid rgba(16, 185, 129, 0.2);">
+                <div>
+                    <span style="font-weight: 600; color: #6ee7b7; display: block;">전체 웹사이트 응답 상태</span>
+                    <span id="health-summary-text" style="font-size: 0.85rem; color: var(--text-secondary);">버튼을 눌러 모든 등록 사이트의 핑(Ping) 및 서버 응답을 검사하세요.</span>
+                </div>
+                <button id="btn-run-ping-all" class="btn-primary" style="background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%); font-size: 0.85rem;">
+                    🔄 전체 실시간 핑 테스트
+                </button>
+            </div>
+            <div id="health-site-list" class="health-grid" style="max-height: 450px; overflow-y: auto; padding-right: 0.5rem;">
+                <!-- Health items populated dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Central Inbox Modal -->
+    <div id="inbox-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="inbox-modal-title">
+        <div class="modal-content" style="max-width: 750px;">
+            <div class="modal-header">
+                <h2 id="inbox-modal-title" class="modal-title">🔔 통합 알림 & 고객 문의 수신함</h2>
+                <button id="btn-close-inbox" class="btn-close-modal" aria-label="모달 닫기">&times;</button>
+            </div>
+            <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; align-items: center; justify-content: space-between;">
+                <div style="display: flex; gap: 0.5rem;">
+                    <button class="inbox-filter-btn active" data-filter="all">전체 알림</button>
+                    <button class="inbox-filter-btn" data-filter="unread">읽지 않음</button>
+                    <button class="inbox-filter-btn" data-filter="contact">고객 문의</button>
+                    <button class="inbox-filter-btn" data-filter="system">시스템 경고</button>
+                </div>
+                <button id="btn-simulate-inbox" class="btn-secondary" style="font-size: 0.8rem; padding: 0.4rem 0.8rem;">
+                    + 테스트 문의 생성
+                </button>
+            </div>
+            <div id="inbox-list" style="max-height: 420px; overflow-y: auto; display: flex; flex-direction: column; gap: 0.8rem;">
+                <!-- Notifications populated dynamically -->
+            </div>
         </div>
     </div>
 

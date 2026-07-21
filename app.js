@@ -299,6 +299,7 @@ function toggleSandbox(show) {
     const drawer = document.getElementById("sandbox-drawer");
     const backdrop = document.getElementById("drawer-backdrop");
     if (show) {
+        renderIdeas();
         drawer.classList.add("active");
         backdrop.classList.add("active");
     } else {

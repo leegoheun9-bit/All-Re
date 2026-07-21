@@ -3,7 +3,7 @@ const DEFAULT_SITES = [
     {
         id: "mirai-studio",
         name: "MIRAI STUDIO (미래 스튜디오)",
-        url: "../미디어파이프활용-사업웹/index.html",
+        url: "https://miraistudio.co.kr",
         category: "ai",
         status: "active",
         desc: "실시간 Web 3D AI 버튜버 & 아바타 메이커. 스마트폰이나 노트북 웹캠만으로 사용자의 표정과 10개 손가락 관절 모션을 추적하여 3D 아바타(.vrm)에 리깅하는 실시간 라이브 방송 솔루션입니다.",

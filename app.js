@@ -1241,7 +1241,7 @@ function setupEventListeners() {
 // Initialize on DOM Ready
 document.addEventListener("DOMContentLoaded", () => {
     loadSites();
-    loadSandbox();
+    loadIdeas();
     loadNotifications();
     renderStats();
     renderFilters();

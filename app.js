@@ -12,7 +12,8 @@ const DEFAULT_SITES = [
         monthlyRevenue: 1200000,
         monthlyVisitors: 4500,
         domainExpDate: "2026-08-15",
-        sslExpDate: "2026-07-28"
+        sslExpDate: "2026-07-28",
+        gaId: "529963349"
     },
     {
         id: "echo-shadowing",
@@ -677,7 +678,7 @@ function closeHealthModal() {
 // ----------------------------------------------------
 let ga4Config = {
     token: "",
-    defaultProperty: ""
+    defaultProperty: "529963349"
 };
 
 function loadGa4Config() {
@@ -685,9 +686,15 @@ function loadGa4Config() {
     if (saved) {
         try {
             ga4Config = JSON.parse(saved);
+            if (!ga4Config.defaultProperty) {
+                ga4Config.defaultProperty = "529963349";
+            }
         } catch (e) {
             console.error("Failed to parse GA4 config", e);
         }
+    } else {
+        ga4Config = { token: "", defaultProperty: "529963349" };
+        saveGa4Config("", "529963349");
     }
 }
 

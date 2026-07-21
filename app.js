@@ -11,8 +11,6 @@ const DEFAULT_SITES = [
         dateAdded: "2026-07-15T10:57:00Z",
         monthlyRevenue: 1200000,
         monthlyVisitors: 4500,
-        domainExpDate: "2026-08-15",
-        sslExpDate: "2026-07-28",
         gaId: "529963349"
     },
     {
@@ -25,9 +23,7 @@ const DEFAULT_SITES = [
         tags: ["AI", "Speech Recognition", "Shadowing", "English Study"],
         dateAdded: "2026-07-16T08:05:00Z",
         monthlyRevenue: 0,
-        monthlyVisitors: 0,
-        domainExpDate: "2026-09-01",
-        sslExpDate: "2026-08-05"
+        monthlyVisitors: 0
     },
     {
         id: "v-taxflow",
@@ -39,9 +35,7 @@ const DEFAULT_SITES = [
         tags: ["AI Tax", "Freelancer", "Finance"],
         dateAdded: "2026-07-16T08:08:00Z",
         monthlyRevenue: 0,
-        monthlyVisitors: 0,
-        domainExpDate: "2026-07-26",
-        sslExpDate: "2026-08-04"
+        monthlyVisitors: 0
     },
     {
         id: "magic-kids-ar",
@@ -182,13 +176,22 @@ function loadSites() {
         try {
             sites = JSON.parse(saved);
 
-            // Migration: Add monthlyRevenue and monthlyVisitors to legacy saved cards
+            // Migration: Add monthlyRevenue and clean up sample fake dates
             let needsSave = false;
             sites.forEach(site => {
                 if (site.monthlyRevenue === undefined) {
                     const defaultSite = DEFAULT_SITES.find(d => d.id === site.id);
                     site.monthlyRevenue = defaultSite ? defaultSite.monthlyRevenue : 0;
                     site.monthlyVisitors = defaultSite ? defaultSite.monthlyVisitors : 0;
+                    needsSave = true;
+                }
+                // Clean up fake sample dates
+                if (site.domainExpDate === "2026-08-15" || site.domainExpDate === "2026-09-01" || site.domainExpDate === "2026-07-26") {
+                    delete site.domainExpDate;
+                    needsSave = true;
+                }
+                if (site.sslExpDate === "2026-07-28" || site.sslExpDate === "2026-08-05" || site.sslExpDate === "2026-08-04") {
+                    delete site.sslExpDate;
                     needsSave = true;
                 }
             });

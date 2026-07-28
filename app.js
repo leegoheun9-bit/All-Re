@@ -718,6 +718,48 @@ function closeGa4Modal() {
     document.getElementById("ga4-modal").classList.remove("active");
 }
 
+function handleGoogleSignIn() {
+    if (typeof google === "undefined" || !google.accounts || !google.accounts.oauth2) {
+        alert("구글 라이브러리를 불러오는 중입니다. 1초 후 다시 시도해 주세요.");
+        return;
+    }
+
+    try {
+        const tokenClient = google.accounts.oauth2.initTokenClient({
+            client_id: "1071253912952-sampleclientid.apps.googleusercontent.com",
+            scope: "https://www.googleapis.com/auth/analytics.readonly",
+            callback: (response) => {
+                if (response && response.access_token) {
+                    const token = response.access_token;
+                    const defaultProp = document.getElementById("ga4-default-property").value.trim() || "529963349";
+                    document.getElementById("ga4-api-token").value = token;
+                    saveGa4Config(token, defaultProp);
+                    alert("🎉 구글 계정이 성공적으로 연동되었습니다! 실시간 데이터 동기화를 시작합니다.");
+                    closeGa4Modal();
+                    syncTrafficData();
+                } else {
+                    promptGa4ManualFallback();
+                }
+            }
+        });
+        tokenClient.requestAccessToken({ prompt: "consent" });
+    } catch (e) {
+        promptGa4ManualFallback();
+    }
+}
+
+function promptGa4ManualFallback() {
+    const manualToken = prompt("🔑 구글 인증 또는 Access Token (ya29...)을 입력해 주시면 바로 연동을 완료합니다:");
+    if (manualToken && manualToken.trim()) {
+        const cleanToken = manualToken.trim();
+        document.getElementById("ga4-api-token").value = cleanToken;
+        saveGa4Config(cleanToken, "529963349");
+        alert("🎉 연동이 성공적으로 완료되었습니다! 실시간 트래픽을 동기화합니다.");
+        closeGa4Modal();
+        syncTrafficData();
+    }
+}
+
 async function fetchGa4RealData(propertyId, token) {
     if (!propertyId || !token) return null;
     const cleanProp = propertyId.replace("properties/", "");

@@ -10,8 +10,8 @@ const DEFAULT_SITES = [
         tags: ["Three.js", "MediaPipe", "WebGL", "Kalidokit"],
         dateAdded: "2026-07-15T10:57:00Z",
         monthlyRevenue: 1200000,
-        monthlyVisitors: 4500,
-        gaId: "529963349"
+        monthlyVisitors: 0,
+        gaId: "G-NPZW5DX2NJ"
     },
     {
         id: "echo-shadowing",
@@ -176,13 +176,19 @@ function loadSites() {
         try {
             sites = JSON.parse(saved);
 
-            // Migration: Add monthlyRevenue and clean up sample fake dates
+            // Migration: Reset any unverified visitor counts to 0 and apply real gaId
             let needsSave = false;
             sites.forEach(site => {
+                if (site.id === "mirai-studio" && (!site.gaId || site.gaId === "529963349")) {
+                    site.gaId = "G-NPZW5DX2NJ";
+                    needsSave = true;
+                }
+                if (!site.isGaRealData && site.monthlyVisitors !== 0) {
+                    site.monthlyVisitors = 0;
+                    needsSave = true;
+                }
                 if (site.monthlyRevenue === undefined) {
-                    const defaultSite = DEFAULT_SITES.find(d => d.id === site.id);
-                    site.monthlyRevenue = defaultSite ? defaultSite.monthlyRevenue : 0;
-                    site.monthlyVisitors = defaultSite ? defaultSite.monthlyVisitors : 0;
+                    site.monthlyRevenue = 0;
                     needsSave = true;
                 }
                 // Clean up fake sample dates

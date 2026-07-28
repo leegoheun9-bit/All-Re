@@ -327,11 +327,11 @@
     </div>
 
     <!-- Idea Sandbox Drawer -->
-    <div id="drawer-backdrop" class="drawer-backdrop"></div>
+    <div id="drawer-backdrop" class="drawer-backdrop" onclick="toggleSandbox(false)"></div>
     <div id="sandbox-drawer" class="sandbox-drawer" role="complementary" aria-label="아이디어 샌드박스">
         <div class="sandbox-header">
             <h2 class="sandbox-title">💡 아이디어 샌드박스</h2>
-            <button id="btn-close-sandbox" class="btn-close-sandbox" aria-label="샌드박스 닫기">&times;</button>
+            <button id="btn-close-sandbox" class="btn-close-sandbox" onclick="toggleSandbox(false)" aria-label="샌드박스 닫기">&times;</button>
         </div>
         
         <form id="sandbox-form" class="sandbox-form">

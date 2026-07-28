@@ -314,6 +314,11 @@ function toggleSandbox(show) {
     }
 }
 
+// Bind Global Window Functions for Inline Event Handlers
+window.toggleSandbox = toggleSandbox;
+window.deleteIdea = deleteIdea;
+window.convertToProject = convertToProject;
+
 // Render Header/Challenge Board stats
 function renderStats() {
     const totalCount = sites.length;
@@ -565,6 +570,9 @@ function openAddModal() {
     document.getElementById("site-form").reset();
     document.getElementById("site-modal").classList.add("active");
 }
+
+window.openAddModal = openAddModal;
+window.openEditModal = openEditModal;
 
 function openEditModal(id) {
     const site = sites.find(s => s.id === id);

@@ -496,6 +496,7 @@ function renderSites() {
                     <span>👥</span>
                     <span style="color: var(--text-secondary);">방문자:</span>
                     <span style="font-weight: 700; color: #34d399;">${Number(site.monthlyVisitors || 0).toLocaleString()}명</span>
+                    ${site.isGaRealData ? '<span style="font-size: 0.7rem; background: rgba(52, 211, 153, 0.2); color: #34d399; padding: 1px 5px; border-radius: 4px; margin-left: 2px;">✅ GA4실제</span>' : '<span style="font-size: 0.7rem; background: rgba(148, 163, 184, 0.15); color: #94a3b8; padding: 1px 5px; border-radius: 4px; margin-left: 2px;">미연동</span>'}
                 </div>
             </div>
 
@@ -819,27 +820,9 @@ async function syncTrafficData() {
             }
         }
 
-        // Live Uptime Ping Fallback Metric
-        try {
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 2000);
-            const startTime = performance.now();
-            await fetch(site.url, { method: "HEAD", mode: "no-cors", signal: controller.signal });
-            clearTimeout(timeoutId);
-            const duration = Math.round(performance.now() - startTime);
-
-            let estimatedVisitors = Math.round(Math.max(120, (3000 / Math.max(duration, 20)) * 45));
-            if (site.id === "mirai-studio") estimatedVisitors = 4820;
-            if (site.id === "echo-shadowing") estimatedVisitors = 1350;
-            if (site.id === "v-taxflow") estimatedVisitors = 2100;
-
-            site.monthlyVisitors = estimatedVisitors;
-            totalUpdated++;
-        } catch (e) {
-            if (site.status === "active") {
-                site.monthlyVisitors = site.monthlyVisitors || 350;
-            }
-        }
+        // If GA4 real data is not connected or token invalid, set to 0 (No fake numbers)
+        site.monthlyVisitors = 0;
+        site.isGaRealData = false;
     }
 
     saveSites();

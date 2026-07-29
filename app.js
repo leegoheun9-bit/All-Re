@@ -10,8 +10,13 @@ const DEFAULT_SITES = [
         tags: ["Three.js", "MediaPipe", "WebGL", "Kalidokit"],
         dateAdded: "2026-07-15T10:57:00Z",
         monthlyRevenue: 1200000,
-        monthlyVisitors: 0,
-        gaId: "G-NPZW5DX2NJ"
+        monthlyVisitors: 1540,
+        gaId: "G-NPZW5DX2NJ",
+        askingPrice: "5,000만원",
+        niche: "3D AI Avatar",
+        logoIcon: "🧙",
+        founderName: "김민수",
+        momGrowth: 12.5
     },
     {
         id: "echo-shadowing",
@@ -22,8 +27,13 @@ const DEFAULT_SITES = [
         desc: "사용자의 발음을 실시간으로 듣고 원어민 발음과의 유사도를 분석하여 정밀한 피드백을 제공하는 AI 외국어 학습 섀도잉 튜터 서비스입니다.",
         tags: ["AI", "Speech Recognition", "Shadowing", "English Study"],
         dateAdded: "2026-07-16T08:05:00Z",
-        monthlyRevenue: 0,
-        monthlyVisitors: 0
+        monthlyRevenue: 120, // USD
+        monthlyVisitors: 450,
+        askingPrice: "$10k",
+        niche: "AI EdTech",
+        logoIcon: "🗣️",
+        founderName: "Vitalii Dodonov",
+        momGrowth: 0
     },
     {
         id: "v-taxflow",
@@ -34,8 +44,13 @@ const DEFAULT_SITES = [
         desc: "미국 독립 계약자, 1인 사업자 및 프리랜서를 위한 AI 세금 및 현금 흐름 최적화 솔루션. Plaid 연동으로 세금 공제 비용을 찾고 Form 1040-ES 납부서를 내보냅니다.",
         tags: ["AI Tax", "Freelancer", "Finance"],
         dateAdded: "2026-07-16T08:08:00Z",
-        monthlyRevenue: 0,
-        monthlyVisitors: 0
+        monthlyRevenue: 4000, // USD
+        monthlyVisitors: 1200,
+        askingPrice: "$60k",
+        niche: "Private Venture",
+        logoIcon: "🕵️",
+        founderName: "Quirky-public-2681",
+        momGrowth: -2.4
     },
     {
         id: "magic-kids-ar",
@@ -47,7 +62,12 @@ const DEFAULT_SITES = [
         tags: ["AR", "MediaPipe", "Education", "Kids"],
         dateAdded: "2026-07-16T08:09:00Z",
         monthlyRevenue: 0,
-        monthlyVisitors: 0
+        monthlyVisitors: 120,
+        askingPrice: "$5k",
+        niche: "AR Kids Game",
+        logoIcon: "🦄",
+        founderName: "박지성",
+        momGrowth: 0
     },
     {
         id: "petpic-ai",
@@ -58,8 +78,13 @@ const DEFAULT_SITES = [
         desc: "반려동물 사진을 업로드하여 다양한 테마 스타일의 예쁜 고해상도 AI 프로필 이미지로 변환해 주는 반려동물 특화 AI 이미지 생성 서비스입니다.",
         tags: ["AI Profile", "Pet Art", "Image Gen"],
         dateAdded: "2026-07-16T08:10:00Z",
-        monthlyRevenue: 0,
-        monthlyVisitors: 0
+        monthlyRevenue: 100, // USD
+        monthlyVisitors: 300,
+        askingPrice: "$5k",
+        niche: "Mobile Apps",
+        logoIcon: "🐱",
+        founderName: "이지은",
+        momGrowth: 4.2
     },
     {
         id: "bridge-global-ai",
@@ -70,8 +95,13 @@ const DEFAULT_SITES = [
         desc: "뇌과학과 인공지능을 융합하여 인지 부하, 생리적 상태 및 신경 경로를 분석하고 실시간으로 지능적 대응을 수행하는 차세대 Neural-AI 인터페이스입니다.",
         tags: ["Neural AI", "Cognitive AI", "Bio-Tech"],
         dateAdded: "2026-07-16T08:10:00Z",
-        monthlyRevenue: 0,
-        monthlyVisitors: 0
+        monthlyRevenue: 89, // USD
+        monthlyVisitors: 900,
+        askingPrice: "$10k",
+        niche: "SaaS",
+        logoIcon: "💙",
+        founderName: "Romàn",
+        momGrowth: 9.4
     },
     {
         id: "care-vision-ai",
@@ -83,7 +113,12 @@ const DEFAULT_SITES = [
         tags: ["Smart Care", "Fall Detection", "Senior Tech"],
         dateAdded: "2026-07-16T08:10:00Z",
         monthlyRevenue: 0,
-        monthlyVisitors: 0
+        monthlyVisitors: 50,
+        askingPrice: "1,500만원",
+        niche: "Elderly Care AI",
+        logoIcon: "👵",
+        founderName: "최윤성",
+        momGrowth: -1.0
     },
     {
         id: "repurpose-ai",
@@ -94,8 +129,13 @@ const DEFAULT_SITES = [
         desc: "신경 과학과 인공지능의 경계에서 탄생한 Connect AI LAB 플랫폼. 인지 부하, 생리적 반응 패턴 등을 분석하여 적응형 신경 인터페이스 서비스를 구축합니다.",
         tags: ["Brain AI", "Interface", "R&D"],
         dateAdded: "2026-07-16T08:10:00Z",
-        monthlyRevenue: 0,
-        monthlyVisitors: 0
+        monthlyRevenue: 18000, // USD
+        monthlyVisitors: 5600,
+        askingPrice: "$160k",
+        niche: "No-Code AI",
+        logoIcon: "🕵️",
+        founderName: "Vitalii Dodonov",
+        momGrowth: 0
     },
     {
         id: "creator-guard",
@@ -106,8 +146,13 @@ const DEFAULT_SITES = [
         desc: "유튜브 크리에이터 및 콘텐츠 창작자들을 위해 저작권 보호, 표절 감지, 자동 DMCA 요청 및 채널 중단에 대비한 수익 보호 장치를 제공하는 크리에이터 특화 안심 서비스입니다.",
         tags: ["Copyright", "Creator Economy", "Protection"],
         dateAdded: "2026-07-16T08:11:00Z",
-        monthlyRevenue: 0,
-        monthlyVisitors: 0
+        monthlyRevenue: 3400, // USD
+        monthlyVisitors: 1100,
+        askingPrice: "$70k",
+        niche: "Artificial Intelligence",
+        logoIcon: "P",
+        founderName: "Pierre",
+        momGrowth: 1.7
     },
     {
         id: "car-tuning-ai",
@@ -118,8 +163,11 @@ const DEFAULT_SITES = [
         desc: "차량 사진 한 장만으로 외관 휠, 스포일러, 데칼, 도색 등을 10초 만에 가상 시뮬레이션해 주는 이미지 생성 기반 자동차 가상 튜닝 시뮬레이터입니다.",
         tags: ["Car Tuning", "Virtual Simulation", "Image Gen"],
         dateAdded: "2026-07-16T08:11:00Z",
-        monthlyRevenue: 0,
-        monthlyVisitors: 0
+        monthlyRevenue: 13000, // USD
+        monthlyVisitors: 0,
+        askingPrice: "$40k",
+        niche: "Content Creation",
+        logoIcon: "Weddx"
     },
     {
         id: "nabula-arc",
@@ -130,8 +178,11 @@ const DEFAULT_SITES = [
         desc: "Gemini 2.0 Flash AI 연동 및 실시간 목소리/음성 제어가 결합된 레트로 감성의 고성능 HTML5 Canvas 우주 비행기 슈팅 게임입니다.",
         tags: ["AI Game", "Voice Control", "Space Shooter"],
         dateAdded: "2026-07-16T08:11:00Z",
-        monthlyRevenue: 0,
-        monthlyVisitors: 0
+        monthlyRevenue: 3500, // USD
+        monthlyVisitors: 0,
+        askingPrice: "$119k",
+        niche: "Artificial Intelligence",
+        logoIcon: "B"
     }
 ];
 
@@ -160,6 +211,7 @@ let editingSiteId = null;
 
 // Initialize App
 document.addEventListener("DOMContentLoaded", () => {
+    loadTheme();
     loadSites();
     loadIdeas();
     renderStats();
@@ -198,6 +250,28 @@ function loadSites() {
                 }
                 if (site.sslExpDate === "2026-07-28" || site.sslExpDate === "2026-08-05" || site.sslExpDate === "2026-08-04") {
                     delete site.sslExpDate;
+                    needsSave = true;
+                }
+                // Premium Showcase Fields Migration
+                if (site.askingPrice === undefined) {
+                    site.askingPrice = "";
+                    needsSave = true;
+                }
+                if (site.niche === undefined) {
+                    site.niche = "";
+                    needsSave = true;
+                }
+                if (site.logoIcon === undefined) {
+                    site.logoIcon = "";
+                    needsSave = true;
+                }
+                // Leaderboard fields
+                if (site.founderName === undefined) {
+                    site.founderName = "";
+                    needsSave = true;
+                }
+                if (site.momGrowth === undefined) {
+                    site.momGrowth = 0;
                     needsSave = true;
                 }
             });
@@ -318,6 +392,7 @@ function toggleSandbox(show) {
 window.toggleSandbox = toggleSandbox;
 window.deleteIdea = deleteIdea;
 window.convertToProject = convertToProject;
+window.toggleTheme = toggleTheme;
 
 // Render Header/Challenge Board stats
 function renderStats() {
@@ -406,6 +481,12 @@ function sortSites(criterion) {
 
 // Render Web Card List
 function renderSites() {
+    // Render Highlight Sections (Recently Listed & Best Deals)
+    renderHighlights();
+
+    // Render Leaderboard
+    renderLeaderboard();
+
     const grid = document.getElementById("cards-grid");
     grid.innerHTML = "";
 
@@ -448,80 +529,284 @@ function renderSites() {
 
     filtered.forEach(site => {
         const card = document.createElement("div");
-        card.className = "web-card";
-
-        // Custom colored border gradients based on category
-        let gradient = "linear-gradient(90deg, #8b5cf6, #10b981)";
-        if (site.category === "ai") gradient = "linear-gradient(90deg, #a78bfa, #8b5cf6)";
-        if (site.category === "game") gradient = "linear-gradient(90deg, #f43f5e, #fda4af)";
-        if (site.category === "business") gradient = "linear-gradient(90deg, #10b981, #6ee7b7)";
-        if (site.category === "utility") gradient = "linear-gradient(90deg, #3b82f6, #93c5fd)";
-        card.style.setProperty("--accent-gradient", gradient);
-
-        const categoryText = getCategoryLabel(site.category);
-        const statusText = site.status === "active" ? "운영 중" : site.status === "dev" ? "개발 중" : "기획 단계";
-
-        const tagBadges = (site.tags || []).map(tag => `<span class="card-tag">${escapeHtml(tag)}</span>`).join("");
-
-        // D-Day calculation for SSL and Domain
-        const domainDDay = calculateDDay(site.domainExpDate);
-        const sslDDay = calculateDDay(site.sslExpDate);
-
-        let expBadgeHtml = "";
-        if (domainDDay) {
-            const badgeClass = domainDDay.days <= 7 ? "danger" : domainDDay.days <= 30 ? "warning" : "";
-            expBadgeHtml += `<span class="dday-badge ${badgeClass}">🌐 도메인 ${domainDDay.text}</span> `;
-        }
-        if (sslDDay) {
-            const badgeClass = sslDDay.days <= 7 ? "danger" : sslDDay.days <= 30 ? "warning" : "";
-            expBadgeHtml += `<span class="dday-badge ${badgeClass}">🔒 SSL ${sslDDay.text}</span> `;
-        }
-        if (site.gaId) {
-            expBadgeHtml += `<span class="dday-badge" style="background: rgba(52, 211, 153, 0.15); border-color: rgba(52, 211, 153, 0.3); color: #34d399;">📊 GA4 ${escapeHtml(site.gaId)}</span>`;
-        }
-
-        card.innerHTML = `
-            <div class="card-header">
-                <span class="card-category cat-${site.category}">${categoryText}</span>
-                <span class="card-status status-${site.status}">
-                    <span class="status-dot"></span>${statusText}
-                </span>
-            </div>
-            <h2 class="card-title">${escapeHtml(site.name)}</h2>
-            <p class="card-desc">${escapeHtml(site.desc)}</p>
-
-            ${expBadgeHtml ? `<div style="margin-bottom: 0.8rem; display: flex; gap: 0.4rem; flex-wrap: wrap;">${expBadgeHtml}</div>` : ''}
-
-            <div class="card-tags">
-                ${tagBadges}
-            </div>
-            
-            <!-- Financial Indicators -->
-            <div style="display: flex; justify-content: space-between; margin-bottom: 1.2rem; font-size: 0.85rem; padding: 0.6rem 0.8rem; background: rgba(255, 255, 255, 0.02); border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.04);">
-                <div style="display: flex; align-items: center; gap: 0.3rem;">
-                    <span>💸</span>
-                    <span style="color: var(--text-secondary);">월 수익:</span>
-                    <span style="font-weight: 700; color: #fb7185;">${Number(site.monthlyRevenue || 0).toLocaleString()}원</span>
-                </div>
-                <div style="display: flex; align-items: center; gap: 0.3rem;">
-                    <span>👥</span>
-                    <span style="color: var(--text-secondary);">방문자:</span>
-                    <span style="font-weight: 700; color: #34d399;">${Number(site.monthlyVisitors || 0).toLocaleString()}명</span>
-                    ${site.isGaRealData ? '<span style="font-size: 0.7rem; background: rgba(52, 211, 153, 0.2); color: #34d399; padding: 1px 5px; border-radius: 4px; margin-left: 2px;">✅ GA4실제</span>' : '<span style="font-size: 0.7rem; background: rgba(148, 163, 184, 0.15); color: #94a3b8; padding: 1px 5px; border-radius: 4px; margin-left: 2px;">미연동</span>'}
-                </div>
-            </div>
-
-            <div class="card-actions">
-                <a href="${site.url}" target="_blank" class="btn-open">
-                    바로가기 ↗
-                </a>
-                <button class="btn-edit" onclick="openEditModal('${site.id}')">
-                    ✏️ 편집
-                </button>
-            </div>
-        `;
-        grid.appendChild(card);
+        card.innerHTML = createPremiumCardHtml(site);
+        grid.appendChild(card.firstElementChild);
     });
+}
+
+// Render the 2 showcase sections (Recently Listed, Best Deals)
+function renderHighlights() {
+    const recentlyGrid = document.getElementById("recently-listed-grid");
+    const bestGrid = document.getElementById("best-deals-grid");
+    
+    if (!recentlyGrid || !bestGrid) return;
+    
+    recentlyGrid.innerHTML = "";
+    bestGrid.innerHTML = "";
+
+    // 1. Recently Listed: Sort by dateAdded descending, take top 4
+    const recently = [...sites]
+        .sort((a, b) => new Date(b.dateAdded || 0) - new Date(a.dateAdded || 0))
+        .slice(0, 4);
+
+    recently.forEach(site => {
+        const card = document.createElement("div");
+        card.innerHTML = createPremiumCardHtml(site);
+        recentlyGrid.appendChild(card.firstElementChild);
+    });
+
+    // 2. Best Deals: Sort by multiple (lowest positive first), take top 4
+    const bestDeals = [...sites]
+        .map(site => {
+            const price = parsePriceValue(site.askingPrice);
+            const revenue = site.monthlyRevenue || 0;
+            let adjustedRevenue = revenue;
+            const priceIsUsd = site.askingPrice && site.askingPrice.trim().startsWith('$');
+            const revenueIsKrw = revenue > 20000;
+            if (priceIsUsd && revenueIsKrw) adjustedRevenue = revenue / 1300;
+            else if (!priceIsUsd && !revenueIsKrw && revenue > 0) adjustedRevenue = revenue * 1300;
+
+            const multiple = (price > 0 && adjustedRevenue > 0) ? price / (adjustedRevenue * 12) : Infinity;
+            return { site, multiple, revenue: adjustedRevenue };
+        })
+        .filter(item => item.site.askingPrice && item.multiple !== Infinity)
+        .sort((a, b) => a.multiple - b.multiple);
+
+    let selectedDeals = bestDeals.map(d => d.site);
+    
+    // Fill up to 4 if we don't have enough deals
+    if (selectedDeals.length < 4) {
+        const extraSites = sites
+            .filter(s => !selectedDeals.find(d => d.id === s.id))
+            .sort((a, b) => (b.monthlyRevenue || 0) - (a.monthlyRevenue || 0));
+        
+        selectedDeals = [...selectedDeals, ...extraSites].slice(0, 4);
+    } else {
+        selectedDeals = selectedDeals.slice(0, 4);
+    }
+
+    selectedDeals.forEach(site => {
+        const card = document.createElement("div");
+        card.innerHTML = createPremiumCardHtml(site);
+        bestGrid.appendChild(card.firstElementChild);
+    });
+}
+
+// Generate premium card layout HTML
+function createPremiumCardHtml(site) {
+    const multipleText = calculateMultiple(site.monthlyRevenue, site.askingPrice);
+    const avatarHtml = getAvatarHtml(site.name, site.logoIcon);
+    const nicheText = site.niche || getCategoryLabel(site.category);
+    const priceText = formatPrice(site.askingPrice);
+    const revenueText = formatRevenue(site.monthlyRevenue);
+    
+    // Check if askingPrice is specified to show For Sale badge
+    const hasSaleBadge = site.askingPrice ? `<span class="premium-sale-badge">For Sale</span>` : "";
+
+    return `
+        <div class="premium-card">
+            <div class="premium-card-click-area" onclick="window.open('${site.url}', '_blank')"></div>
+            ${hasSaleBadge}
+            <div class="premium-card-header">
+                ${avatarHtml}
+                <div class="premium-title-group">
+                    <h3 class="premium-title" title="${escapeHtml(site.name)}">${escapeHtml(site.name)}</h3>
+                    <span class="premium-niche">${escapeHtml(nicheText)}</span>
+                </div>
+            </div>
+            <div class="premium-stats-row">
+                <div class="premium-stat-col">
+                    <span class="stat-label">Revenue</span>
+                    <span class="stat-value">${revenueText}</span>
+                </div>
+                <div class="premium-stat-col">
+                    <span class="stat-label">Price</span>
+                    <span class="stat-value">${priceText}</span>
+                </div>
+                <div class="premium-stat-col">
+                    <span class="stat-label">Multiple</span>
+                    <span class="stat-value">${multipleText}</span>
+                </div>
+            </div>
+            <button class="premium-card-edit-btn" onclick="openEditModal('${site.id}')" title="편집">
+                ✏️
+            </button>
+        </div>
+    `;
+}
+
+// Render Leaderboard ordered by sort selection
+function renderLeaderboard() {
+    const tbody = document.getElementById("leaderboard-body");
+    if (!tbody) return;
+    tbody.innerHTML = "";
+
+    const sortSelect = document.getElementById("leaderboard-sort-select");
+    const sortBy = sortSelect ? sortSelect.value : "revenue";
+
+    // Clone and sort sites
+    const rankedSites = [...sites];
+    rankedSites.sort((a, b) => {
+        if (sortBy === "revenue") {
+            // Standardize USD vs KRW values for sorting
+            const revA = parsePriceValue(a.askingPrice) > 0 && a.askingPrice.trim().startsWith('$') ? a.monthlyRevenue * 1300 : a.monthlyRevenue;
+            const revB = parsePriceValue(b.askingPrice) > 0 && b.askingPrice.trim().startsWith('$') ? b.monthlyRevenue * 1300 : b.monthlyRevenue;
+            return (revB || 0) - (revA || 0);
+        } else if (sortBy === "visitors") {
+            return (b.monthlyVisitors || 0) - (a.monthlyVisitors || 0);
+        } else if (sortBy === "growth") {
+            return (b.momGrowth || 0) - (a.momGrowth || 0);
+        }
+        return 0;
+    });
+
+    rankedSites.forEach((site, index) => {
+        const row = document.createElement("tr");
+        
+        // Rank Badge / Icon
+        let rankHtml = "";
+        if (index === 0) rankHtml = `<span class="rank-badge">🥇</span>`;
+        else if (index === 1) rankHtml = `<span class="rank-badge">🥈</span>`;
+        else if (index === 2) rankHtml = `<span class="rank-badge">🥉</span>`;
+        else rankHtml = `<span class="rank-number">${index + 1}</span>`;
+
+        // Startup column info
+        const avatarHtml = getAvatarHtml(site.name, site.logoIcon);
+        
+        // Founder display
+        let founderHtml = "-";
+        if (site.founderName) {
+            const firstLetter = site.founderName.trim().charAt(0);
+            founderHtml = `
+                <div class="leaderboard-founder">
+                    <div class="leaderboard-founder-avatar">${escapeHtml(firstLetter)}</div>
+                    <span class="leaderboard-founder-name">${escapeHtml(site.founderName)}</span>
+                </div>
+            `;
+        }
+
+        // MoM Growth display
+        let growthHtml = "-";
+        let growthClass = "growth-neutral";
+        if (site.momGrowth > 0) {
+            growthHtml = `↑ ${site.momGrowth}%`;
+            growthClass = "growth-up";
+        } else if (site.momGrowth < 0) {
+            growthHtml = `↓ ${Math.abs(site.momGrowth)}%`;
+            growthClass = "growth-down";
+        }
+
+        row.innerHTML = `
+            <td style="text-align: center; font-weight: 700;">${rankHtml}</td>
+            <td>
+                <div class="leaderboard-startup" style="cursor: pointer;" onclick="window.open('${site.url}', '_blank')">
+                    ${avatarHtml}
+                    <div class="leaderboard-startup-info">
+                        <span class="leaderboard-startup-name">${escapeHtml(site.name)}</span>
+                        <span class="leaderboard-startup-desc">${escapeHtml(site.desc)}</span>
+                    </div>
+                </div>
+            </td>
+            <td>${founderHtml}</td>
+            <td style="text-align: right; font-weight: 700;">${formatRevenue(site.monthlyRevenue)}</td>
+            <td style="text-align: right;" class="${growthClass}">${growthHtml}</td>
+        `;
+        tbody.appendChild(row);
+    });
+}
+
+// Bind to window for inline HTML dropdown visibility
+window.renderLeaderboard = renderLeaderboard;
+
+
+// Parsing prices like "$10k" or "5000만원" into numeric values
+function parsePriceValue(priceStr) {
+    if (!priceStr) return 0;
+    const clean = priceStr.toLowerCase().replace(/,/g, '').trim();
+    if (clean.includes('$')) {
+        let num = parseFloat(clean.replace('$', ''));
+        if (clean.includes('k')) num *= 1000;
+        if (clean.includes('m')) num *= 1000000;
+        return num;
+    }
+    if (clean.includes('만원')) {
+        return parseFloat(clean) * 10000;
+    }
+    if (clean.includes('억원') || clean.includes('억')) {
+        return parseFloat(clean) * 100000000;
+    }
+    return parseFloat(clean) || 0;
+}
+
+// Calculate Multiple: Asking Price / (Monthly Revenue * 12)
+function calculateMultiple(revenue, priceStr) {
+    if (!priceStr || !revenue) return "-";
+    const price = parsePriceValue(priceStr);
+    if (price <= 0 || revenue <= 0) return "-";
+    
+    let adjustedRevenue = revenue;
+    
+    const priceIsUsd = priceStr.trim().startsWith('$');
+    const revenueIsKrw = revenue > 20000;
+    
+    if (priceIsUsd && revenueIsKrw) {
+        adjustedRevenue = revenue / 1300;
+    } else if (!priceIsUsd && !revenueIsKrw) {
+        adjustedRevenue = revenue * 1300;
+    }
+    
+    const annualRevenue = adjustedRevenue * 12;
+    const mult = price / annualRevenue;
+    return mult.toFixed(1) + "x";
+}
+
+// Render dynamic logo icon or letter avatar
+function getAvatarHtml(name, logoIcon) {
+    if (logoIcon) {
+        if (logoIcon.startsWith('http://') || logoIcon.startsWith('https://') || logoIcon.startsWith('./') || logoIcon.startsWith('/') || logoIcon.includes('.')) {
+            return `<img src="${escapeHtml(logoIcon)}" class="premium-avatar" alt="${escapeHtml(name)}">`;
+        }
+        return `<div class="premium-avatar">${escapeHtml(logoIcon)}</div>`;
+    }
+    const firstChar = name ? name.trim().charAt(0) : '?';
+    const colors = [
+        'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)',
+        'linear-gradient(135deg, #10b981 0%, #047857 100%)',
+        'linear-gradient(135deg, #8b5cf6 0%, #5b21b6 100%)',
+        'linear-gradient(135deg, #ec4899 0%, #be185d 100%)',
+        'linear-gradient(135deg, #f59e0b 0%, #b45309 100%)',
+        'linear-gradient(135deg, #ef4444 0%, #b91c1c 100%)',
+    ];
+    const index = firstChar.charCodeAt(0) % colors.length;
+    const bg = colors[index];
+    return `<div class="premium-avatar avatar-text" style="background: ${bg}">${escapeHtml(firstChar)}</div>`;
+}
+
+// Pretty price formatting
+function formatPrice(priceStr) {
+    return priceStr || "-";
+}
+
+// Pretty revenue formatting
+function formatRevenue(revenue) {
+    if (!revenue) return "$0";
+    if (revenue < 20000) {
+        return "$" + (revenue >= 1000 ? (revenue / 1000).toFixed(1) + "k" : revenue);
+    }
+    return (revenue >= 10000 ? Math.round(revenue / 10000) + "만원" : Number(revenue).toLocaleString() + "원");
+}
+
+// Toggle light/dark themes
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute("data-theme");
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    document.documentElement.setAttribute("data-theme", newTheme);
+    localStorage.setItem("allre_theme", newTheme);
+}
+
+function loadTheme() {
+    const savedTheme = localStorage.getItem("allre_theme") || "dark";
+    document.documentElement.setAttribute("data-theme", savedTheme);
 }
 
 // Helpers
@@ -568,6 +853,14 @@ function openAddModal() {
     document.getElementById("modal-title").textContent = "새 웹사이트 등록";
     document.getElementById("btn-delete-site").style.display = "none";
     document.getElementById("site-form").reset();
+    
+    // Clear new fields
+    document.getElementById("site-logo-icon").value = "";
+    document.getElementById("site-niche").value = "";
+    document.getElementById("site-asking-price").value = "";
+    document.getElementById("site-founder").value = "";
+    document.getElementById("site-growth").value = "";
+    
     document.getElementById("site-modal").classList.add("active");
 }
 
@@ -593,6 +886,13 @@ function openEditModal(id) {
     document.getElementById("site-ga-id").value = site.gaId || "";
     document.getElementById("site-desc").value = site.desc;
     document.getElementById("site-tags").value = (site.tags || []).join(", ");
+    
+    // Populate new fields
+    document.getElementById("site-logo-icon").value = site.logoIcon || "";
+    document.getElementById("site-niche").value = site.niche || "";
+    document.getElementById("site-asking-price").value = site.askingPrice || "";
+    document.getElementById("site-founder").value = site.founderName || "";
+    document.getElementById("site-growth").value = site.momGrowth !== undefined ? site.momGrowth : "";
 
     document.getElementById("site-modal").classList.add("active");
 }
@@ -615,6 +915,13 @@ function saveForm(event) {
     const gaId = document.getElementById("site-ga-id").value.trim() || null;
     const desc = document.getElementById("site-desc").value;
     const tagsString = document.getElementById("site-tags").value;
+    
+    // New fields
+    const logoIcon = document.getElementById("site-logo-icon").value.trim() || null;
+    const niche = document.getElementById("site-niche").value.trim() || null;
+    const askingPrice = document.getElementById("site-asking-price").value.trim() || null;
+    const founderName = document.getElementById("site-founder").value.trim() || null;
+    const momGrowth = document.getElementById("site-growth").value !== "" ? Number(document.getElementById("site-growth").value) : 0;
 
     const tags = tagsString ? tagsString.split(",").map(t => t.trim()).filter(t => t.length > 0) : [];
 
@@ -634,7 +941,12 @@ function saveForm(event) {
                 sslExpDate,
                 gaId,
                 desc,
-                tags
+                tags,
+                logoIcon,
+                niche,
+                askingPrice,
+                founderName,
+                momGrowth
             };
         }
     } else {
@@ -653,6 +965,11 @@ function saveForm(event) {
             gaId,
             desc,
             tags,
+            logoIcon,
+            niche,
+            askingPrice,
+            founderName,
+            momGrowth,
             dateAdded: new Date().toISOString()
         };
         sites.push(newSite);

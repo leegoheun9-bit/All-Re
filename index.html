@@ -39,6 +39,9 @@
                 <button id="btn-toggle-sandbox" class="btn-secondary" onclick="toggleSandbox(true)" style="padding: 0.6rem 1.2rem; font-size: 0.85rem; border-color: rgba(244, 63, 94, 0.4); color: #fb7185; cursor: pointer;" aria-label="아이디어 샌드박스 열기">
                     💡 아이디어 보드
                 </button>
+                <button id="btn-toggle-theme" class="btn-secondary" onclick="toggleTheme()" style="padding: 0.6rem 1.2rem; font-size: 0.85rem; border-color: rgba(255, 255, 255, 0.2); color: var(--text-primary); cursor: pointer;" aria-label="화면 테마 변경">
+                    🌓 테마 변경
+                </button>
                 <button id="btn-export" class="btn-secondary" style="padding: 0.6rem 1.2rem; font-size: 0.85rem;" aria-label="데이터 백업">
                     📤 백업 (Export)
                 </button>
@@ -110,6 +113,59 @@
             </div>
         </section>
 
+        <!-- Highlighted Premium Showcase Sections (Matching requested UI) -->
+        <section class="highlights-section">
+            <div class="highlight-group">
+                <div class="highlight-header">
+                    <h2>Recently listed</h2>
+                </div>
+                <div id="recently-listed-grid" class="premium-cards-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+            
+            <div class="highlight-group" style="margin-top: 2.5rem; margin-bottom: 2.5rem;">
+                <div class="highlight-header">
+                    <h2>Best deals this week</h2>
+                </div>
+                <div id="best-deals-grid" class="premium-cards-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Leaderboard Section (Matching requested UI) -->
+        <section class="leaderboard-section" style="margin-bottom: 2.5rem;">
+            <div class="leaderboard-card">
+                <div class="leaderboard-header">
+                    <h2>Leaderboard</h2>
+                    <div style="display: flex; gap: 0.8rem; align-items: center;">
+                        <select id="leaderboard-sort-select" class="sort-select" style="padding: 0.5rem 1rem; font-size: 0.85rem;" onchange="renderLeaderboard()">
+                            <option value="revenue">MRR (월 예상 수익)</option>
+                            <option value="visitors">방문자 수</option>
+                            <option value="growth">MoM Growth (성장률)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="leaderboard-table-wrapper">
+                    <table class="leaderboard-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 80px; text-align: center;">#</th>
+                                <th>Startup</th>
+                                <th>Founder</th>
+                                <th style="text-align: right;">MRR</th>
+                                <th style="text-align: right; width: 150px;">MoM Growth</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leaderboard-body">
+                            <!-- Populated dynamically by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
         <!-- Filters & Search Control Panel -->
         <section class="controls-panel">
             <!-- Search & Sort -->
@@ -150,16 +206,22 @@
 
     <!-- Add/Edit Modal Overlay -->
     <div id="site-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-        <div class="modal-content">
+        <div class="modal-content" style="max-width: 600px;">
             <div class="modal-header">
                 <h2 id="modal-title" class="modal-title">새 웹사이트 등록</h2>
                 <button id="btn-close-modal" class="btn-close-modal" aria-label="모달 닫기">&times;</button>
             </div>
             
             <form id="site-form">
-                <div class="form-group">
-                    <label for="site-name">웹사이트 이름 *</label>
-                    <input type="text" id="site-name" class="form-control" placeholder="예: MIRAI STUDIO" required>
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label for="site-name">웹사이트 이름 *</label>
+                        <input type="text" id="site-name" class="form-control" placeholder="예: MIRAI STUDIO" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="site-logo-icon">로고 (이모지/URL)</label>
+                        <input type="text" id="site-logo-icon" class="form-control" placeholder="예: 🏆 또는 URL">
+                    </div>
                 </div>
                 
                 <div class="form-group">
@@ -185,22 +247,45 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label for="site-niche">세부 분야 (Niche)</label>
+                        <input type="text" id="site-niche" class="form-control" placeholder="예: SaaS, Mobile Apps, 3D Art">
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
                         <label for="site-status">개발 및 운영 상태 *</label>
                         <select id="site-status" class="form-control" required>
                             <option value="active">운영 중 (Active)</option>
                             <option value="dev">개발 중 (In Dev)</option>
                             <option value="planned">기획 단계 (Planned)</option>
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="site-asking-price">희망 판매 가격 (USD / 만원)</label>
+                        <input type="text" id="site-asking-price" class="form-control" placeholder="예: $5k 또는 1,000만원">
+                    </div>
                 </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.2rem; margin-bottom: 1.2rem;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.5rem; margin-bottom: 0.5rem;">
                     <div class="form-group" style="margin-bottom: 0;">
-                        <label for="site-revenue">월 예상 수익 (원)</label>
+                        <label for="site-revenue">월 예상 수익 (원 / 달러 숫자만)</label>
                         <input type="number" id="site-revenue" class="form-control" placeholder="0" min="0">
                     </div>
                     <div class="form-group" style="margin-bottom: 0;">
                         <label for="site-visitors">월 활성 방문자 수 (명)</label>
                         <input type="number" id="site-visitors" class="form-control" placeholder="0" min="0">
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.8rem; margin-bottom: 0.8rem;">
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label for="site-founder">창업자 (Founder)</label>
+                        <input type="text" id="site-founder" class="form-control" placeholder="예: Vitalii Dodonov">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label for="site-growth">전월 대비 성장률 (MoM Growth, %)</label>
+                        <input type="number" id="site-growth" class="form-control" placeholder="예: 26 또는 -5" step="0.1">
                     </div>
                 </div>
 

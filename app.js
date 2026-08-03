@@ -7,7 +7,7 @@ const DEFAULT_SITES = [
         category: "ai",
         status: "active",
         desc: "실시간 Web 3D AI 버튜버 & 아바타 메이커. 스마트폰이나 노트북 웹캠만으로 사용자의 표정과 10개 손가락 관절 모션을 추적하여 3D 아바타(.vrm)에 리깅하는 실시간 라이브 방송 솔루션입니다.",
-        tags: ["Three.js", "MediaPipe", "WebGL", "Kalidokit"],
+        tags: ["Three.js", "MediaPipe", "WebGL", "Kalidokit", "3D AI"],
         dateAdded: "2026-07-15T10:57:00Z",
         monthlyRevenue: 1200000,
         monthlyVisitors: 1540,
@@ -25,7 +25,7 @@ const DEFAULT_SITES = [
         category: "ai",
         status: "active",
         desc: "사용자의 발음을 실시간으로 듣고 원어민 발음과의 유사도를 분석하여 정밀한 피드백을 제공하는 AI 외국어 학습 섀도잉 튜터 서비스입니다.",
-        tags: ["AI", "Speech Recognition", "Shadowing", "English Study"],
+        tags: ["Gemini Live API", "Web Speech API", "React", "AI Shadowing", "Vite"],
         dateAdded: "2026-07-16T08:05:00Z",
         monthlyRevenue: 120, // USD
         monthlyVisitors: 450,
@@ -42,7 +42,7 @@ const DEFAULT_SITES = [
         category: "business",
         status: "active",
         desc: "미국 독립 계약자, 1인 사업자 및 프리랜서를 위한 AI 세금 및 현금 흐름 최적화 솔루션. Plaid 연동으로 세금 공제 비용을 찾고 Form 1040-ES 납부서를 내보냅니다.",
-        tags: ["AI Tax", "Freelancer", "Finance"],
+        tags: ["Plaid API", "AI Tax", "FinTech", "Freelance", "TailwindCSS"],
         dateAdded: "2026-07-16T08:08:00Z",
         monthlyRevenue: 4000, // USD
         monthlyVisitors: 1200,
@@ -59,7 +59,7 @@ const DEFAULT_SITES = [
         category: "game",
         status: "active",
         desc: "AI와 증강현실(AR) 기술을 결합하여 구연동화, 낱말 놀이, 동물 변신 등을 즐기는 인터랙티브 유아 교육 플랫폼입니다. 신체 움직임으로 상호작용합니다.",
-        tags: ["AR", "MediaPipe", "Education", "Kids"],
+        tags: ["MediaPipe", "WebXR", "Toss Payments", "HTML5 Canvas", "EdTech"],
         dateAdded: "2026-07-16T08:09:00Z",
         monthlyRevenue: 0,
         monthlyVisitors: 120,
@@ -76,7 +76,7 @@ const DEFAULT_SITES = [
         category: "ai",
         status: "active",
         desc: "반려동물 사진을 업로드하여 다양한 테마 스타일의 예쁜 고해상도 AI 프로필 이미지로 변환해 주는 반려동물 특화 AI 이미지 생성 서비스입니다.",
-        tags: ["AI Profile", "Pet Art", "Image Gen"],
+        tags: ["Stable Diffusion", "AI Image Gen", "Canvas API", "Pet Art"],
         dateAdded: "2026-07-16T08:10:00Z",
         monthlyRevenue: 100, // USD
         monthlyVisitors: 300,
@@ -92,8 +92,8 @@ const DEFAULT_SITES = [
         url: "https://b-globalai.live",
         category: "ai",
         status: "active",
-        desc: "뇌과학과 인공지능을 융합하여 인지 부하, 생리적 상태 및 신경 경로를 분석하고 실시간으로 지능적 대응을 수행하는 차세대 Neural-AI 인터페이스입니다.",
-        tags: ["Neural AI", "Cognitive AI", "Bio-Tech"],
+        desc: "글로벌 무역 언어 장벽 해소를 위한 0.1초 음성 실시간 번역, 인코텀즈 위험 분석 및 AI 회의록 자동 생성 B2B 무역 플랫폼입니다.",
+        tags: ["Voice API", "B2B Translation", "Trade AI", "NLP"],
         dateAdded: "2026-07-16T08:10:00Z",
         monthlyRevenue: 89, // USD
         monthlyVisitors: 900,
@@ -109,8 +109,8 @@ const DEFAULT_SITES = [
         url: "https://carevisionai.co.kr",
         category: "ai",
         status: "active",
-        desc: "시니어를 위한 스마트 케어 솔루션. 실시간 카메라 화면을 분석하여 낙상 감지, 환자 상태 모니터링 및 실시간 알림을 제공하는 실시간 헬스케어 시스템입니다.",
-        tags: ["Smart Care", "Fall Detection", "Senior Tech"],
+        desc: "시니어를 위한 스마트 케어 솔루션. 실시간 카메라 화면을 분석하여 낙상 감지, 환자 상태 모니터링 및 Firebase 실시간 연동 모니터링을 제공합니다.",
+        tags: ["MediaPipe Pose", "Firebase", "Computer Vision", "Smart Care"],
         dateAdded: "2026-07-16T08:10:00Z",
         monthlyRevenue: 0,
         monthlyVisitors: 50,
@@ -127,7 +127,7 @@ const DEFAULT_SITES = [
         category: "ai",
         status: "active",
         desc: "신경 과학과 인공지능의 경계에서 탄생한 Connect AI LAB 플랫폼. 인지 부하, 생리적 반응 패턴 등을 분석하여 적응형 신경 인터페이스 서비스를 구축합니다.",
-        tags: ["Brain AI", "Interface", "R&D"],
+        tags: ["Neural AI", "Cognitive AI", "Brain Interface", "R&D"],
         dateAdded: "2026-07-16T08:10:00Z",
         monthlyRevenue: 18000, // USD
         monthlyVisitors: 5600,
@@ -143,14 +143,14 @@ const DEFAULT_SITES = [
         url: "https://creatorguard.cloud",
         category: "business",
         status: "active",
-        desc: "유튜브 크리에이터 및 콘텐츠 창작자들을 위해 저작권 보호, 표절 감지, 자동 DMCA 요청 및 채널 중단에 대비한 수익 보호 장치를 제공하는 크리에이터 특화 안심 서비스입니다.",
-        tags: ["Copyright", "Creator Economy", "Protection"],
+        desc: "유튜브 크리에이터 및 콘텐츠 창작자들을 위해 저작권 보호, 표절 감지, 자동 DMCA 요청 및 채널 중단에 대비한 수익 보호 장치를 제공하는 서비스입니다.",
+        tags: ["React", "Vite", "Copyright AI", "DMCA Auto", "YouTube API"],
         dateAdded: "2026-07-16T08:11:00Z",
         monthlyRevenue: 3400, // USD
         monthlyVisitors: 1100,
         askingPrice: "$70k",
         niche: "Artificial Intelligence",
-        logoIcon: "P",
+        logoIcon: "🛡️",
         founderName: "Pierre",
         momGrowth: 1.7
     },
@@ -161,13 +161,15 @@ const DEFAULT_SITES = [
         category: "ai",
         status: "active",
         desc: "차량 사진 한 장만으로 외관 휠, 스포일러, 데칼, 도색 등을 10초 만에 가상 시뮬레이션해 주는 이미지 생성 기반 자동차 가상 튜닝 시뮬레이터입니다.",
-        tags: ["Car Tuning", "Virtual Simulation", "Image Gen"],
+        tags: ["Next.js", "Gemini Flash 2.0", "TailwindCSS", "Image Gen", "Vercel"],
         dateAdded: "2026-07-16T08:11:00Z",
         monthlyRevenue: 13000, // USD
         monthlyVisitors: 0,
         askingPrice: "$40k",
         niche: "Content Creation",
-        logoIcon: "Weddx"
+        logoIcon: "🏎️",
+        founderName: "Weddx",
+        momGrowth: 5.0
     },
     {
         id: "nabula-arc",
@@ -176,13 +178,15 @@ const DEFAULT_SITES = [
         category: "game",
         status: "active",
         desc: "Gemini 2.0 Flash AI 연동 및 실시간 목소리/음성 제어가 결합된 레트로 감성의 고성능 HTML5 Canvas 우주 비행기 슈팅 게임입니다.",
-        tags: ["AI Game", "Voice Control", "Space Shooter"],
+        tags: ["HTML5 Canvas", "Gemini 2.0 Flash", "Web Speech API", "Voice Control"],
         dateAdded: "2026-07-16T08:11:00Z",
         monthlyRevenue: 3500, // USD
         monthlyVisitors: 0,
         askingPrice: "$119k",
         niche: "Artificial Intelligence",
-        logoIcon: "B"
+        logoIcon: "🚀",
+        founderName: "B",
+        momGrowth: 3.2
     }
 ];
 
@@ -229,9 +233,14 @@ function loadSites() {
         try {
             sites = JSON.parse(saved);
 
-            // Migration: Reset any unverified visitor counts to 0 and apply real gaId
             let needsSave = false;
             sites.forEach(site => {
+                const defaultMatch = DEFAULT_SITES.find(d => d.id === site.id);
+                if (defaultMatch) {
+                    site.tags = defaultMatch.tags;
+                    if (defaultMatch.logoIcon) site.logoIcon = defaultMatch.logoIcon;
+                    needsSave = true;
+                }
                 if (site.id === "mirai-studio" && (!site.gaId || site.gaId === "529963349")) {
                     site.gaId = "G-NPZW5DX2NJ";
                     needsSave = true;
@@ -242,37 +251,6 @@ function loadSites() {
                 }
                 if (site.monthlyRevenue === undefined) {
                     site.monthlyRevenue = 0;
-                    needsSave = true;
-                }
-                // Clean up fake sample dates
-                if (site.domainExpDate === "2026-08-15" || site.domainExpDate === "2026-09-01" || site.domainExpDate === "2026-07-26") {
-                    delete site.domainExpDate;
-                    needsSave = true;
-                }
-                if (site.sslExpDate === "2026-07-28" || site.sslExpDate === "2026-08-05" || site.sslExpDate === "2026-08-04") {
-                    delete site.sslExpDate;
-                    needsSave = true;
-                }
-                // Premium Showcase Fields Migration
-                if (site.askingPrice === undefined) {
-                    site.askingPrice = "";
-                    needsSave = true;
-                }
-                if (site.niche === undefined) {
-                    site.niche = "";
-                    needsSave = true;
-                }
-                if (site.logoIcon === undefined) {
-                    site.logoIcon = "";
-                    needsSave = true;
-                }
-                // Leaderboard fields
-                if (site.founderName === undefined) {
-                    site.founderName = "";
-                    needsSave = true;
-                }
-                if (site.momGrowth === undefined) {
-                    site.momGrowth = 0;
                     needsSave = true;
                 }
             });

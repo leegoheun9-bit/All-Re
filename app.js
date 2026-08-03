@@ -214,6 +214,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loadTheme();
     loadSites();
     loadIdeas();
+    loadNotifications();
     renderStats();
     renderFilters();
     renderSites();
@@ -901,6 +902,33 @@ function closeModal() {
     document.getElementById("site-modal").classList.remove("active");
 }
 
+// Toast Notification helper
+function showToast(message, type = "success") {
+    let container = document.getElementById("toast-container");
+    if (!container) {
+        container = document.createElement("div");
+        container.id = "toast-container";
+        container.className = "toast-container";
+        document.body.appendChild(container);
+    }
+
+    const toast = document.createElement("div");
+    toast.className = `toast toast-${type}`;
+    const icon = type === "success" ? "✅" : "⚠️";
+    toast.innerHTML = `<span style="font-size: 1.1rem;">${icon}</span> <span>${escapeHtml(message)}</span>`;
+
+    container.appendChild(toast);
+
+    setTimeout(() => {
+        toast.classList.add("show");
+    }, 10);
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+        setTimeout(() => toast.remove(), 300);
+    }, 3500);
+}
+
 function saveForm(event) {
     event.preventDefault();
 
@@ -924,6 +952,7 @@ function saveForm(event) {
     const momGrowth = document.getElementById("site-growth").value !== "" ? Number(document.getElementById("site-growth").value) : 0;
 
     const tags = tagsString ? tagsString.split(",").map(t => t.trim()).filter(t => t.length > 0) : [];
+    const isEdit = !!editingSiteId;
 
     if (editingSiteId) {
         // Edit Mode
@@ -950,7 +979,7 @@ function saveForm(event) {
             };
         }
     } else {
-        // Add Mode
+        // Add Mode - Add to start of array so it appears at top
         const newId = "site-" + Date.now();
         const newSite = {
             id: newId,
@@ -972,26 +1001,47 @@ function saveForm(event) {
             momGrowth,
             dateAdded: new Date().toISOString()
         };
-        sites.push(newSite);
+        sites.unshift(newSite);
     }
 
     saveSites();
+
+    // Automatically reset category & search filters so the user IMMEDIATELY sees their new/edited site
+    currentCategory = "all";
+    currentTag = "";
+    currentSearch = "";
+    const searchBox = document.getElementById("search-box");
+    if (searchBox) searchBox.value = "";
+
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+        if (btn.textContent.includes("전체")) {
+            btn.classList.add("active");
+        } else {
+            btn.classList.remove("active");
+        }
+    });
+
     renderStats();
     renderFilters();
     renderSites();
     closeModal();
+
+    showToast(isEdit ? `"${name}" 웹사이트 정보가 수정되었습니다.` : `🎉 "${name}" 웹사이트가 성공적으로 등록되었습니다!`, "success");
 }
 
 function deleteSite() {
     if (!editingSiteId) return;
+    const site = sites.find(s => s.id === editingSiteId);
+    const siteName = site ? site.name : "웹사이트";
 
-    if (confirm("정말로 이 웹사이트 등록을 삭제하시겠습니까?")) {
+    if (confirm(`정말로 "${siteName}" 웹사이트 등록을 삭제하시겠습니까?`)) {
         sites = sites.filter(s => s.id !== editingSiteId);
         saveSites();
         renderStats();
         renderFilters();
         renderSites();
         closeModal();
+        showToast(`"${siteName}" 웹사이트가 삭제되었습니다.`, "danger");
     }
 }
 
@@ -1594,14 +1644,5 @@ function setupEventListeners() {
     });
 }
 
-// Initialize on DOM Ready
-document.addEventListener("DOMContentLoaded", () => {
-    loadSites();
-    loadIdeas();
-    loadNotifications();
-    renderStats();
-    renderFilters();
-    renderSites();
-    setupEventListeners();
-});
+
 

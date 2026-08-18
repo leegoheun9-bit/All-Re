@@ -894,7 +894,7 @@ function toggleTheme() {
 }
 
 function loadTheme() {
-    const savedTheme = localStorage.getItem("allre_theme") || "dark";
+    const savedTheme = localStorage.getItem("allre_theme") || "light";
     document.documentElement.setAttribute("data-theme", savedTheme);
 }
 
